@@ -78,15 +78,7 @@ menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0
 
 st.title(menu_options[menu_selection])
 
-# Menampilkan konten berdasarkan menu yang dipilih
 if menu_selection == "🏠 Dashboard":
-    st.write("Ini adalah halaman Dashboard.")
-elif menu_selection == "📍 Lokasi":
-    st.write("Ini adalah halaman Lokasi.")
-elif menu_selection == "📊 Data Cuaca":
-    st.write("Ini adalah halaman Data Cuaca.")
-
-if menu_selection == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
     if data:
@@ -99,7 +91,7 @@ if menu_selection == "Dashboard":
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
-elif menu_selection == "Lokasi":
+elif menu_selection == "📍Lokasi":
     st.title("Lokasi Stasiun Cuaca")
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
@@ -119,7 +111,7 @@ elif menu_selection == "Lokasi":
     st.image(github_image_url_1, caption="Gambar Lokasi 1", use_container_width=True)
     st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
 
-elif menu_selection == "Data Cuaca":
+elif menu_selection == "📊 Data Cuaca":
     st.title("Data Cuaca")
     df_history = get_history_data()
     if df_history is not None:
