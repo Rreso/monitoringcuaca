@@ -65,11 +65,11 @@ def get_history_data():
 
 # Menu navigasi di sidebar
 st.sidebar.markdown("""
-## <h2>🌤 Sistem Cuaca</h2>
+## 🌤 Sistem Monitoring Cuaca Politeknik Negeri Batam
 """, unsafe_allow_html=True)
 
 menu_options = {
-    "🏠 Dashboard":"",
+    "<h2>🏠 Dashboard</h2>":"",
     "📍 Lokasi":"",
     "📊 Data Cuaca":""
 }
