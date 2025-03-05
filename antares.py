@@ -65,14 +65,21 @@ def get_history_data():
 
 # Sidebar Menu dengan Tombol Navigasi
 st.sidebar.title("Menu")
-menu = None
-if st.sidebar.button("Dashboard"):
-    menu = "Dashboard"
-elif st.sidebar.button("Lokasi"):
-    menu = "Lokasi"
-elif st.sidebar.button("Data Cuaca"):
-    menu = "Data Cuaca"
-    
+menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
+menu = st.sidebar.radio("", menu_options, index=0, format_func=lambda x: x)
+
+st.sidebar.markdown(
+    """
+    <style>
+        .stRadio > div { flex-direction: column; }
+        .stRadio label { width: 100%; padding: 10px; text-align: center; }
+        .stRadio label:hover { background-color: #ddd; }
+        .stRadio label[data-baseweb="radio"] { border-radius: 5px; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 if menu == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
