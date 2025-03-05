@@ -35,24 +35,23 @@ def get_latest_data():
         st.error(f"Error fetching latest data: {e}")
         return None
 
-# === Fungsi Mengambil Data History dari Antares ===
 def get_history_data():
     try:
-        response = session.get(URL_HISTORY, headers=headers, timeout=10)
+        response = requests.get(URL_HISTORY, headers=headers, timeout=10)
         response.raise_for_status()
         data = response.json()
 
-        # 🛑 Debugging: Print JSON response
+        # 🛑 Debugging ulang
         st.subheader("🔍 Debugging Response dari Antares")
         st.json(data)  # Menampilkan response JSON di Streamlit
         
-        # Cek apakah "m2m:cin" ada dalam response
-        if "m2m:cin" not in data:
+        # Pastikan data history tersedia
+        if "m2m:cnt" not in data or "m2m:cin" not in data["m2m:cnt"]:
             st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
             return None
 
         history = []
-        for item in data["m2m:cin"]:
+        for item in data["m2m:cnt"]["m2m:cin"]:
             content = json.loads(item["con"])  # Parsing JSON dalam "con"
             content["timestamp"] = item["ct"]  # Tambahkan timestamp dari "ct"
             history.append(content)
