@@ -93,7 +93,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         """
         <style>
         .stApp{
-            background-color: #a6dbe3; /* Warna latar belakang */
+            background-color: #d0eced; /* Warna latar belakang */
         }
         </style>
         """,
