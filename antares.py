@@ -6,7 +6,7 @@ import json
 ACCESSKEY = st.secrets["ACCESSKEY"]
 PROJECT_NAME = "SistemMonitoringCuaca"
 DEVICE_NAME = "ESP32"
-URL = f"https://platform.antares.id/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
+URL = f"https://platform.antares.id:443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
 
 headers = {
     "X-M2M-Origin": ACCESSKEY,
