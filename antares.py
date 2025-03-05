@@ -65,7 +65,7 @@ def get_history_data():
 
 # Menu navigasi di sidebar
 st.sidebar.markdown("""
-## 🌤 Sistem Cuaca
+## <h2>🌤 Sistem Cuaca</h2>
 """, unsafe_allow_html=True)
 
 menu_options = {
@@ -74,7 +74,8 @@ menu_options = {
     "📊 Data Cuaca":""
 }
 
-menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0)
+menu_selection = st.sidebar.radio("", list(menu_options.keys()), index=0, key="menu")
+st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Spasi agar lebih rapi
 
 st.title(menu_options[menu_selection])
 
