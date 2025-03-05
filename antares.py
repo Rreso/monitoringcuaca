@@ -76,19 +76,19 @@ def set_menu(menu_name):
     st.session_state.selected_menu = menu_name
 
 # Tombol Sidebar
-if st.sidebar.button("🏠 Dashboard", use_container_width=True):
-    set_menu("🏠 Dashboard")
+if st.sidebar.button("Dashboard 🏠", use_container_width=True):
+    set_menu("Dashboard 🏠")
 
-if st.sidebar.button("📍 Lokasi", use_container_width=True):
-    set_menu("📍 Lokasi")
+if st.sidebar.button("Lokasi 📍", use_container_width=True):
+    set_menu("Lokasi 📍")
 
-if st.sidebar.button("📊 Data Cuaca", use_container_width=True):
-    set_menu("📊 Data Cuaca")
+if st.sidebar.button("Data Cuaca 📊", use_container_width=True):
+    set_menu("Data Cuaca 📊")
 
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(st.session_state.selected_menu)
 
-if st.session_state.selected_menu == "🏠 Dashboard":
+if st.session_state.selected_menu == "Dashboard 🏠":
 
     data = get_latest_data()
     if data:
@@ -101,7 +101,7 @@ if st.session_state.selected_menu == "🏠 Dashboard":
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
-elif st.session_state.selected_menu == "📍 Lokasi":
+elif st.session_state.selected_menu == "Lokasi 📍":
 
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
@@ -121,7 +121,7 @@ elif st.session_state.selected_menu == "📍 Lokasi":
     st.image(github_image_url_1, caption="Gambar Lokasi 1", use_container_width=True)
     st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
 
-elif st.session_state.selected_menu == "📊 Data Cuaca":
+elif st.session_state.selected_menu == "Data Cuaca 📊":
 
     df_history = get_history_data()
     if df_history is not None:
