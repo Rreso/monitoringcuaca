@@ -90,8 +90,5 @@ if df_history is not None:
     st.subheader("Grafik Perubahan Cuaca")
     st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
 else:
-    st.error("Gagal mengambil riwayat data dari Antares.")a['Decision Tree']}")
-    st.write(f"**Naive Bayes:** {data['Naive Bayes']}")
-else:
-    st.error("Gagal mengambil data dari Antares.")
+    st.error("Gagal mengambil riwayat data dari Antares.")
 
