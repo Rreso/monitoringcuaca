@@ -94,7 +94,7 @@ elif menu == "Lokasi":
     
     # Tampilkan gambar dari GitHub
     github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  
-    github_image_url_2 = "https://raw.githubusercontent.com/username/repository/main/batam.jpg"  # Ganti dengan URL gambar kedua Anda
+    github_image_url_2 = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/batam.jpg"  # Ganti dengan URL gambar kedua Anda
     
     col1, col2 = st.columns(2)
     with col1:
