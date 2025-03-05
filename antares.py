@@ -81,8 +81,8 @@ if menu == "Dashboard":
 elif menu == "Lokasi":
     st.title("Lokasi Stasiun Cuaca")
     st.write("🗺 Lokasi sensor pemantauan cuaca saat ini")
-    st.map(pd.DataFrame({'lat': [-6.200000], 'lon': [106.816666]}))  # Ganti dengan koordinat aktual
-
+    st.map(pd.DataFrame({'lat': [1.1187657269561744], 'lon': [104.04845501288223]}))  # Ganti dengan koordinat aktual
+ 
 elif menu == "Data Cuaca":
     st.title("Data Cuaca")
     df_history = get_history_data()
