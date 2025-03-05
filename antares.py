@@ -98,7 +98,7 @@ elif menu == "Lokasi":
     
     col1, col2 = st.columns(2)
     with col1:
-        st.image(github_image_url_1, caption="Politeknik Negeri Batam", use_container_width=True)
+        st.image(github_image_url, caption="Politeknik Negeri Batam", use_container_width=True)
     with col2:
         st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)# Ganti dengan URL gambar Anda
 
