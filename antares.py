@@ -63,10 +63,16 @@ def get_history_data():
         st.error(f"Error fetching history data: {e}")
         return None
 
-# Sidebar Menu
+# Sidebar Menu dengan Tombol Navigasi
 st.sidebar.title("Menu")
-menu = st.sidebar.radio("Pilih Menu", ["Dashboard", "Lokasi", "Data Cuaca"])
-
+menu = None
+if st.sidebar.button("Dashboard"):
+    menu = "Dashboard"
+elif st.sidebar.button("Lokasi"):
+    menu = "Lokasi"
+elif st.sidebar.button("Data Cuaca"):
+    menu = "Data Cuaca"
+    
 if menu == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
