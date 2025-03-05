@@ -88,7 +88,17 @@ if st.sidebar.button("Data Cuaca 📊", use_container_width=True):
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(st.session_state.selected_menu)
 
-if st.session_state.selected_menu == "Dashboard 🏠":    
+if st.session_state.selected_menu == "Dashboard 🏠":  
+        st.markdown(
+        """
+        <style>
+        .stApp{
+            background-color: #d0eced; /* Warna latar belakang */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     data = get_latest_data()
     if data:
         # Tampilan bersampingan dengan tinggi yang sejajar
@@ -122,6 +132,16 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
 elif st.session_state.selected_menu == "Lokasi 📍":
+        st.markdown(
+        """
+        <style>
+        .stApp{
+            background-color: #d0eced; /* Warna latar belakang */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
     
@@ -141,6 +161,16 @@ elif st.session_state.selected_menu == "Lokasi 📍":
     st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)
 
 elif st.session_state.selected_menu == "Data Cuaca 📊":
+        st.markdown(
+        """
+        <style>
+        .stApp{
+            background-color: #d0eced; /* Warna latar belakang */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     df_history = get_history_data()
     if df_history is not None:
         st.subheader("📜 Riwayat Data Cuaca (10 Data Terakhir)")
