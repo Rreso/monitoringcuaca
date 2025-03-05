@@ -69,7 +69,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 menu_options = {
-    "🏠 Overview": "Dashboard",
+    "🏠 Dashboard",
     "📊 Insight Hub": "Insight",
     "📌 Usecase": "Usecase",
     "🖥 Platform": "Platform",
@@ -78,19 +78,7 @@ menu_options = {
 
 menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0)
 
-# Tampilan untuk menu yang aktif
-st.sidebar.markdown("---")
-for menu, page in menu_options.items():
-    if menu == menu_selection:
-        st.sidebar.markdown(f"**➡ {menu}**")  # Memberi tanda untuk menu aktif
-    else:
-        st.sidebar.markdown(f"{menu}")
-
-st.sidebar.markdown("---")
-
-
-
-if menu_selection == "Dashboard":
+if menu_selection == "🏠 Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
     if data:
