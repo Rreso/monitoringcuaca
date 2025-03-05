@@ -91,7 +91,7 @@ if menu_selection == "🏠 Dashboard":
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
-elif menu_selection == "📍Lokasi":
+elif menu_selection == "📍 Lokasi":
     st.title("Lokasi Stasiun Cuaca")
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
