@@ -98,7 +98,8 @@ st.sidebar.markdown(
 menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
 menu_selection = st.sidebar.selectbox("Pilih Menu", menu_options, index=0, label_visibility="collapsed")
 
-if menu == "Dashboard":
+if menu_selection == "Dashboard":
+    st.sidebar.markdown('<button class="menu-button menu-button-active">Dashboard</button>', unsafe_allow_html=True)
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
     if data:
@@ -111,14 +112,13 @@ if menu == "Dashboard":
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
-elif menu == "Lokasi":
+elif menu_selection == "Lokasi":
+    st.sidebar.markdown('<button class="menu-button menu-button-active">Lokasi</button>', unsafe_allow_html=True)
     st.title("Lokasi Stasiun Cuaca")
     
-    # Masukkan koordinat lokasi
-    latitude = 1.1187578768824524  # Sesuaikan dengan lokasi stasiun cuaca
+    latitude = 1.1187578768824524
     longitude = 104.04846548164217
     
-    # Buat Peta
     m = folium.Map(location=[latitude, longitude], zoom_start=15, width="100%", height=600)
     folium.Marker(
         [latitude, longitude], 
@@ -126,16 +126,16 @@ elif menu == "Lokasi":
         tooltip="Klik untuk info", 
         icon=folium.Icon(icon="cloud", prefix="fa", color="red")
     ).add_to(m)
-    st_folium(m, width=900, height=400) 
-
-    # Tampilkan gambar dari GitHub
-    github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  
-    github_image_url_2 = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/batam.jpg"  # Ganti dengan URL gambar kedua Anda
+    st_folium(m, width=900, height=600)
     
-    st.image(github_image_url, caption="Politeknik Negeri Batam", use_container_width=True)
-    st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)# Ganti dengan URL gambar Anda
+    github_image_url_1 = "https://raw.githubusercontent.com/username/repository/main/image1.jpg"
+    github_image_url_2 = "https://raw.githubusercontent.com/username/repository/main/image2.jpg"
+    
+    st.image(github_image_url_1, caption="Gambar Lokasi 1", use_container_width=True)
+    st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
 
-elif menu == "Data Cuaca":
+elif menu_selection == "Data Cuaca":
+    st.sidebar.markdown('<button class="menu-button menu-button-active">Data Cuaca</button>', unsafe_allow_html=True)
     st.title("Data Cuaca")
     df_history = get_history_data()
     if df_history is not None:
@@ -145,3 +145,4 @@ elif menu == "Data Cuaca":
         st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
     else:
         st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
+
