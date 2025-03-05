@@ -95,7 +95,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.markdown("<h3 style='text-align: center;'>🌡️ Suhu</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align: center;'>🌡 Suhu</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Suhu (°C)']:.2f}°C</h2>", unsafe_allow_html=True)
 
         with col2:
@@ -103,11 +103,11 @@ if st.session_state.selected_menu == "Dashboard 🏠":
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kelembapan (%)']:.2f}%</h2>", unsafe_allow_html=True)
 
         with col3:
-            st.markdown("<h3 style='text-align: center;'>🌬️ Kecepatan Angin</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align: center;'>🌪️ Angin</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kecepatan Angin (Km/h)']:.2f} km/h</h2>", unsafe_allow_html=True)
 
         # Cuaca Real Time
-        st.subheader("🌤️ Cuaca Real Time")
+        st.subheader("<h1>🌤️ Cuaca Real Time</h1>")
         st.markdown(f"<h2>🌦 <b>Decision Tree:</b> {data['Decision Tree']}</h2>", unsafe_allow_html=True)
         st.markdown(f"<h2>☁ <b>Naive Bayes:</b> {data['Naive Bayes']}</h2>", unsafe_allow_html=True)
     else:
