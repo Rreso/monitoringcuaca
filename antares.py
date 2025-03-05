@@ -70,10 +70,7 @@ st.sidebar.markdown("""
 
 menu_options = {
     "🏠 Dashboard",
-    "📊 Insight Hub": "Insight",
-    "📌 Usecase": "Usecase",
-    "🖥 Platform": "Platform",
-    "⚙ Settings": "Settings"
+    "📊 Lokasi"
 }
 
 menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0)
@@ -91,7 +88,7 @@ if menu_selection == "🏠 Dashboard":
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
-elif menu_selection == "Lokasi":
+elif menu_selection == "📊 Lokasi":
     st.title("Lokasi Stasiun Cuaca")
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
