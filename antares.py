@@ -3,7 +3,7 @@ import requests
 import json
 
 # === Konfigurasi Antares HTTP ===
-ACCESSKEY = "ae0e9366ea28edb1:c39aaf1beb2ed531"
+ACCESSKEY = st.secrets["ACCESSKEY"]
 PROJECT_NAME = "SistemMonitoringCuaca"
 DEVICE_NAME = "ESP32"
 URL = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
@@ -13,7 +13,13 @@ headers = {
     "Content-Type": "application/json",
     "Accept": "application/json"
 }
+response = requests.get(URL, headers=headers)
 
+if response.status_code == 200:
+    print("✅ Streamlit Cloud bisa akses Antares!")
+else:
+    print(f"❌ Gagal akses Antares! Status Code: {response.status_code}")
+    
 # === Fungsi Mengambil Data dari Antares ===
 def get_antares_data():
     response = requests.get(URL, headers=headers)
