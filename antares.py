@@ -64,7 +64,8 @@ def get_history_data():
         return None
 
 # Sidebar Menu dengan Tombol Navigasi
-st.sidebar.title("Menu")
+
+st.sidebar.title("Sistem Monitoring Cuaca Polibatam")
 menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
 menu = st.sidebar.radio("", menu_options, index=0, format_func=lambda x: x)
 
@@ -72,7 +73,13 @@ st.sidebar.markdown(
     """
     <style>
         .stRadio > div { flex-direction: column; }
-        .stRadio label { width: 100%; padding: 10px; text-align: center; }
+        .stRadio label {
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
         .stRadio label:hover { background-color: #ddd; }
         .stRadio label[data-baseweb="radio"] { border-radius: 5px; }
     </style>
