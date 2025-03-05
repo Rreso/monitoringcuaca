@@ -90,7 +90,7 @@ st.title(st.session_state.selected_menu)
 
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(menu_selection)
-if menu_selection == "🏠 Dashboard":
+if st.session_state.selected_menu == "🏠 Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
     if data:
@@ -103,7 +103,7 @@ if menu_selection == "🏠 Dashboard":
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
-elif menu_selection == "📍 Lokasi":
+elif st.session_state.selected_menu == "📍 Lokasi":
     st.title("Lokasi Stasiun Cuaca")
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
@@ -123,7 +123,7 @@ elif menu_selection == "📍 Lokasi":
     st.image(github_image_url_1, caption="Gambar Lokasi 1", use_container_width=True)
     st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
 
-elif menu_selection == "📊 Data Cuaca":
+elif st.session_state.selected_menu == "📊 Data Cuaca":
     st.title("Data Cuaca")
     df_history = get_history_data()
     if df_history is not None:
