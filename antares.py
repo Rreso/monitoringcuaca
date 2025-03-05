@@ -34,7 +34,7 @@ def get_latest_data():
         response = session.get(URL_LATEST, headers=headers, timeout=10)
         response.raise_for_status()
         data = response.json()
-        return json.loads(data["m2m:cin"]["con"])
+        return json.loads(data["m2m:cin"]or(data["m2m:cnt"]["con"])
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching latest data: {e}")
         return None
