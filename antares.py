@@ -91,12 +91,26 @@ st.title(st.session_state.selected_menu)
 if st.session_state.selected_menu == "Dashboard 🏠":
     data = get_latest_data()
     if data:
-        st.metric("Suhu (°C)", f"{data['Suhu (°C)']:.2f}°C")
-        st.metric("Kelembapan (%)", f"{data['Kelembapan (%)']:.2f}%")
-        st.metric("Kecepatan Angin (Km/h)", f"{data['Kecepatan Angin (Km/h)']:.2f} km/h")
-        st.subheader("Cuaca Real Time")
-        st.write(f"🌦 **Decision Tree:** {data['Decision Tree']}")
-        st.write(f"☁ **Naive Bayes:** {data['Naive Bayes']}")
+        # Tampilan bersampingan
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.markdown("### 🌡️ Suhu")
+            st.metric(label="", value=f"{data['Suhu (°C)']:.2f}°C")
+
+        with col2:
+            st.markdown("### 💧 Kelembapan")
+            st.metric(label="", value=f"{data['Kelembapan (%)']:.2f}%")
+
+        with col3:
+            st.markdown("### 🌬️ Kecepatan Angin")
+            st.metric(label="", value=f"{data['Kecepatan Angin (Km/h)']:.2f} km/h")
+
+        # Cuaca Real Time
+        st.subheader("🌤️ Cuaca Real Time")
+        st.markdown(f"### 🌦 **Decision Tree:** {data['Decision Tree']}")
+        st.markdown(f"### ☁ **Naive Bayes:** {data['Naive Bayes']}")
+    
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
