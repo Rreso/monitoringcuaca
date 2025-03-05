@@ -66,24 +66,13 @@ def get_history_data():
 # Menu navigasi di sidebar
 st.sidebar.title("Menu")
 menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
-menu_selection = st.sidebar.radio("Pilih Menu:", menu_options, index=0)
-# Tambahkan gaya CSS untuk memperbesar tulisan dan memberikan padding
-st.markdown(
-    f"""
-    <style>
-        div[data-baseweb="radio"] label {{
-            font-size: 20px !important;
-            font-weight: bold;
-            padding: 10px 15px;
-        }}
-        div[data-baseweb="radio"] input:checked + label {{
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
+menu_selection = st.sidebar.radio(
+    "Pilih Menu", 
+    menu_options, 
+    index=0, 
+    format_func=lambda x: f"**{x}**"  # Membuat teks menu lebih besar
 )
+
 if menu_selection == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
