@@ -96,10 +96,9 @@ elif menu == "Lokasi":
     github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  
     github_image_url_2 = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/batam.jpg"  # Ganti dengan URL gambar kedua Anda
     
-    col1, col2 = st.columns(2)
-    with col1:
+ 
         st.image(github_image_url, caption="Politeknik Negeri Batam", use_container_width=True)
-    with col2:
+
         st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)# Ganti dengan URL gambar Anda
 
 elif menu == "Data Cuaca":
