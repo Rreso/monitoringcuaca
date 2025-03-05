@@ -69,7 +69,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 menu_options = {
-    "<h2>🏠 Dashboard</h2>":"",
+    "🏠 <h2>Dashboard</h2>":"",
     "📍 Lokasi":"",
     "📊 Data Cuaca":""
 }
