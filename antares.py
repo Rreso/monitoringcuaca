@@ -88,8 +88,6 @@ if st.sidebar.button("📊 Data Cuaca", use_container_width=True):
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(st.session_state.selected_menu)
 
-# --- Tampilan Konten Berdasarkan Menu ---
-st.title(menu_selection)
 if st.session_state.selected_menu == "🏠 Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
