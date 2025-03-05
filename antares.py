@@ -69,9 +69,9 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 menu_options = {
-    "🏠 Dashboard": "Dashboard",
-    "📍 Lokasi": "Lokasi",
-    "📊 Data Cuaca": "Data Cuaca"
+    "🏠 Dashboard",
+    "📍 Lokasi",
+    "📊 Data Cuaca"
 }
 
 menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0)
