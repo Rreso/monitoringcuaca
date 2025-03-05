@@ -69,7 +69,7 @@ st.sidebar.title("🌤 Sistem Monitoring Cuaca")
 
 # State untuk menyimpan menu yang dipilih
 if "selected_menu" not in st.session_state:
-    st.session_state.selected_menu = "🏠 Dashboard"
+    st.session_state.selected_menu = "Dashboard 🏠"
 
 # Fungsi untuk mengubah menu saat tombol ditekan
 def set_menu(menu_name):
@@ -107,7 +107,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kecepatan Angin (Km/h)']:.2f} km/h</h2>", unsafe_allow_html=True)
 
         # Cuaca Real Time
-        st.header("🌤️ Cuaca Real Time")
+        st.header("Cuaca Realtime Area Polibatam 🌤️")
         col4, col5 = st.columns(2)
         
         with col4:
