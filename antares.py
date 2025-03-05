@@ -90,29 +90,28 @@ st.title(st.session_state.selected_menu)
 
 if st.session_state.selected_menu == "Dashboard 🏠":
     data = get_latest_data()
-if data:
-    # Tampilan bersampingan dengan tinggi yang sejajar
-    col1, col2, col3 = st.columns(3)
+    if data:
+        # Tampilan bersampingan dengan tinggi yang sejajar
+        col1, col2, col3 = st.columns(3)
 
-    with col1:
-        st.markdown("<h3 style='text-align: center;'>🌡️ Suhu</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Suhu (°C)']:.2f}°C</h2>", unsafe_allow_html=True)
+        with col1:
+            st.markdown("<h3 style='text-align: center;'>🌡️ Suhu</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Suhu (°C)']:.2f}°C</h2>", unsafe_allow_html=True)
 
-    with col2:
-        st.markdown("<h3 style='text-align: center;'>💧 Kelembapan</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kelembapan (%)']:.2f}%</h2>", unsafe_allow_html=True)
+        with col2:
+            st.markdown("<h3 style='text-align: center;'>💧 Kelembapan</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kelembapan (%)']:.2f}%</h2>", unsafe_allow_html=True)
 
-    with col3:
-        st.markdown("<h3 style='text-align: center;'>🌬️ Kecepatan Angin</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kecepatan Angin (Km/h)']:.2f} km/h</h2>", unsafe_allow_html=True)
+        with col3:
+            st.markdown("<h3 style='text-align: center;'>🌬️ Kecepatan Angin</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kecepatan Angin (Km/h)']:.2f} km/h</h2>", unsafe_allow_html=True)
 
-    # Cuaca Real Time
-    st.subheader("🌤️ Cuaca Real Time")
-    st.markdown(f"<h2>🌦 <b>Decision Tree:</b> {data['Decision Tree']}</h2>", unsafe_allow_html=True)
-    st.markdown(f"<h2>☁ <b>Naive Bayes:</b> {data['Naive Bayes']}</h2>", unsafe_allow_html=True)
-
-else:
-    st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
+        # Cuaca Real Time
+        st.subheader("🌤️ Cuaca Real Time")
+        st.markdown(f"<h2>🌦 <b>Decision Tree:</b> {data['Decision Tree']}</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h2>☁ <b>Naive Bayes:</b> {data['Naive Bayes']}</h2>", unsafe_allow_html=True)
+    else:
+        st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
 elif st.session_state.selected_menu == "Lokasi 📍":
     latitude = 1.1187578768824524
