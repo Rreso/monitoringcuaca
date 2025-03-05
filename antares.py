@@ -74,7 +74,7 @@ menu_options = {
     "📊 Data Cuaca"
 }
 
-menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0)
+menu_selection = st.sidebar.radio("Navigasi", list(menu_options()), index=0)
 
 st.title(menu_options[menu_selection])
 
