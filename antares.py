@@ -89,7 +89,7 @@ if st.sidebar.button("📊 Data Cuaca", use_container_width=True):
 st.title(st.session_state.selected_menu)
 
 if st.session_state.selected_menu == "🏠 Dashboard":
-    st.title("Dashboard Monitoring Cuaca")
+
     data = get_latest_data()
     if data:
         st.metric("Suhu (°C)", f"{data['Suhu (°C)']}°C")
@@ -102,7 +102,7 @@ if st.session_state.selected_menu == "🏠 Dashboard":
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
 elif st.session_state.selected_menu == "📍 Lokasi":
-    st.title("Lokasi Stasiun Cuaca")
+
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
     
@@ -122,7 +122,7 @@ elif st.session_state.selected_menu == "📍 Lokasi":
     st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
 
 elif st.session_state.selected_menu == "📊 Data Cuaca":
-    st.title("Data Cuaca")
+
     df_history = get_history_data()
     if df_history is not None:
         st.subheader("📜 Riwayat Data Cuaca (10 Data Terakhir)")
