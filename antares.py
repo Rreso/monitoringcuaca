@@ -80,7 +80,7 @@ st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Spasi agar lebih rapi
 st.title(menu_options[menu_selection])
 
 # CSS untuk mengubah tampilan radio button (padding + warna berbeda saat aktif)
-st.markdown(
+st.sidebar.markdown(
     f"""
     <style>
         div[data-baseweb="radio"] label {{
