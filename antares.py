@@ -17,6 +17,13 @@ DEVICE_NAME = "ESP32"
 
 URL_LATEST = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
 URL_HISTORY = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}?rcn=4&ty=4&fu=1&lim=10"
+URL_BASE = "https://platform.antares.id:8443"
+headers = {
+    "X-M2M-Origin": "YOUR_ACCESS_KEY",
+    "Content-Type": "application/json;ty=4",
+    "Accept": "application/json"
+}
+
 
 headers = {
     "X-M2M-Origin": ACCESSKEY,
@@ -37,31 +44,46 @@ def get_latest_data():
 
 def get_history_data():
     try:
-        response = requests.get(URL_HISTORY, headers=headers, timeout=10)
+        # Ambil daftar URI dari histori
+        response = requests.get(f"{URL_BASE}/~/antares-cse/antares-id/SistemMonitoringCuaca/ESP32?rcn=4&fu=1&ty=4&lim=10",
+                                headers=headers, timeout=10)
         response.raise_for_status()
         data = response.json()
 
-        # 🛑 Debugging ulang
-        st.subheader("🔍 Debugging Response dari Antares")
-        st.json(data)  # Menampilkan response JSON di Streamlit
-        
-        # Pastikan data history tersedia
-        if "m2m:cnt" not in data or "m2m:cin" not in data["m2m:cnt"]:
-            st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
+        # 🛑 Debugging response pertama
+        print("🔍 Response dari Antares (Daftar URI):")
+        print(json.dumps(data, indent=4))
+
+        if "m2m:uril" not in data:
+            print("⚠️ Tidak ada data URI yang ditemukan!")
             return None
 
         history = []
-        for item in data["m2m:cnt"]["m2m:cin"]:
-            content = json.loads(item["con"])  # Parsing JSON dalam "con"
-            content["timestamp"] = item["ct"]  # Tambahkan timestamp dari "ct"
-            history.append(content)
+        for uri in data["m2m:uril"]:
+            # Request untuk mendapatkan isi data di setiap URI
+            data_response = requests.get(f"{URL_BASE}/~{uri}", headers=headers, timeout=10)
+            data_response.raise_for_status()
+            data_content = data_response.json()
 
-        return pd.DataFrame(history)
+            # 🛑 Debugging response isi data
+            print(f"📥 Data dari {uri}:")
+            print(json.dumps(data_content, indent=4))
+
+            if "m2m:cin" in data_content:
+                content = json.loads(data_content["m2m:cin"]["con"])  # Parsing JSON dalam "con"
+                content["timestamp"] = data_content["m2m:cin"]["ct"]  # Tambahkan timestamp
+                history.append(content)
+
+        # Konversi ke Pandas DataFrame
+        if history:
+            return pd.DataFrame(history)
+        else:
+            print("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
+            return None
+
     except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching history data: {e}")
+        print(f"❌ Error fetching history data: {e}")
         return None
-
-# === Membuat Dashboard Streamlit ===
 st.title("Dashboard Monitoring Cuaca")
 
 # Tampilkan Data Terbaru
