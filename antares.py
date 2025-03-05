@@ -66,9 +66,6 @@ def get_history_data():
 # Menu navigasi di sidebar
 st.sidebar.title("🌤 Sistem Monitoring Cuaca")
 
-menu_options = ["🏠 Dashboard", "📍 Lokasi", "📊 Data Cuaca"]
-menu_selection = st.sidebar.radio("Pilih Menu", menu_options, index=0)
-
 # --- Warna dan Padding untuk Tombol ---
 button_styles = {
     "🏠 Dashboard": {"color": "blue", "padding": (10, 30)},
