@@ -93,7 +93,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
     if data:
         st.metric("Suhu (°C)", f"{data['Suhu (°C)']:.2f}°C")
         st.metric("Kelembapan (%)", f"{data['Kelembapan (%)']:.2f}%")
-        st.metric("Kecepatan Angin (Km/h)", 2f"{data['Kecepatan Angin (Km/h)']:.2f} km/h")
+        st.metric("Kecepatan Angin (Km/h)", f"{data['Kecepatan Angin (Km/h)']:.2f} km/h")
         st.subheader("Cuaca Real Time")
         st.write(f"🌦 **Decision Tree:** {data['Decision Tree']}")
         st.write(f"☁ **Naive Bayes:** {data['Naive Bayes']}")
