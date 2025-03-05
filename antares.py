@@ -63,27 +63,10 @@ def get_history_data():
         st.error(f"Error fetching history data: {e}")
         return None
 
-# Menu navigasi dengan radio button
+# Menu navigasi di sidebar
+st.sidebar.title("Menu")
 menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
-menu_selection = st.radio("Pilih Menu:", menu_options, index=0, horizontal=True)
-
-st.markdown(
-    """
-    <style>
-        div[role="radiogroup"] label {
-            font-size: 20px !important;
-            padding: 10px 20px;
-            margin-right: 10px;
-        }
-        div[role="radiogroup"] label[data-selected="true"] {
-            background-color: #0078D7;
-            color: white;
-            border-radius: 5px;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+menu_selection = st.sidebar.radio("Pilih Menu:", menu_options, index=0)
 
 if menu_selection == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
@@ -128,5 +111,6 @@ elif menu_selection == "Data Cuaca":
         st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
     else:
         st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
+
 
 
