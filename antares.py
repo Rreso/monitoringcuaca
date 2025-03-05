@@ -11,7 +11,7 @@ PROJECT_NAME = "SistemMonitoringCuaca"
 DEVICE_NAME = "ESP32"
 
 URL_LATEST = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
-URL_HISTORY = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}?rcn=4&ty=4&lim=10"
+URL_HISTORY = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}?fu=2&ty=4&lim=10"
 
 headers = {
     "X-M2M-Origin": ACCESSKEY,
