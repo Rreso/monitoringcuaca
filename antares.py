@@ -91,9 +91,9 @@ st.title(st.session_state.selected_menu)
 if st.session_state.selected_menu == "Dashboard 🏠":
     data = get_latest_data()
     if data:
-        st.metric("Suhu (°C)", f.2"{data['Suhu (°C)']}°C")
-        st.metric("Kelembapan (%)", f.2"{data['Kelembapan (%)']}%")
-        st.metric("Kecepatan Angin (Km/h)", f.2"{data['Kecepatan Angin (Km/h)']} km/h")
+        st.metric("Suhu (°C)", 2f"{data['Suhu (°C)']}°C")
+        st.metric("Kelembapan (%)", 2f"{data['Kelembapan (%)']}%")
+        st.metric("Kecepatan Angin (Km/h)", 2f"{data['Kecepatan Angin (Km/h)']} km/h")
         st.subheader("Cuaca Real Time")
         st.write(f"🌦 **Decision Tree:** {data['Decision Tree']}")
         st.write(f"☁ **Naive Bayes:** {data['Naive Bayes']}")
