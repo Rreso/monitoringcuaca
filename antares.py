@@ -1,12 +1,32 @@
 import streamlit as st
 import requests
 import json
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
+session = requests.Session()
+retry = Retry(
+    total=5, 
+    backoff_factor=1, 
+    status_forcelist=[500, 502, 503, 504]
+)
+session.mount("https://", HTTPAdapter(max_retries=retry))
+
+def get_antares_data():
+    try:
+        response = session.get(URL, headers=headers, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        return json.loads(data["m2m:cin"]["con"])
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error fetching data: {e}")
+        return None
+        
 # === Konfigurasi Antares HTTP ===
 ACCESSKEY = st.secrets["ACCESSKEY"]
 PROJECT_NAME = "SistemMonitoringCuaca"
 DEVICE_NAME = "ESP32"
-URL = f"https://platform.antares.id:443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
+URL = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
 
 headers = {
     "X-M2M-Origin": ACCESSKEY,
