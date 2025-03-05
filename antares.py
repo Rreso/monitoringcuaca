@@ -92,13 +92,10 @@ if st.session_state.selected_menu == "Dashboard 🏠":
     st.markdown(
         """
         <style>
-        .main {
+        .stApp{
             background-color: #f0f2f6; /* Warna latar belakang */
-            padding: 20px;
-            border-radius: 10px;
         }
         </style>
-        <div class="main">
         """,
         unsafe_allow_html=True
     )
