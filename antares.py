@@ -89,20 +89,18 @@ if st.sidebar.button("Data Cuaca 📊", use_container_width=True):
 st.title(st.session_state.selected_menu)
 
 if st.session_state.selected_menu == "Dashboard 🏠":
-
     data = get_latest_data()
     if data:
-        st.metric("Suhu (°C)", f"{data['Suhu (°C)']}°C")
-        st.metric("Kelembapan (%)", f"{data['Kelembapan (%)']}%")
-        st.metric("Kecepatan Angin (Km/h)", f"{data['Kecepatan Angin (Km/h)']} km/h")
-        st.subheader("Prediksi Cuaca")
+        st.metric("Suhu (°C)", f.2"{data['Suhu (°C)']}°C")
+        st.metric("Kelembapan (%)", f.2"{data['Kelembapan (%)']}%")
+        st.metric("Kecepatan Angin (Km/h)", f.2"{data['Kecepatan Angin (Km/h)']} km/h")
+        st.subheader("Cuaca Real Time")
         st.write(f"🌦 **Decision Tree:** {data['Decision Tree']}")
         st.write(f"☁ **Naive Bayes:** {data['Naive Bayes']}")
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
 elif st.session_state.selected_menu == "Lokasi 📍":
-
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
     
@@ -111,18 +109,17 @@ elif st.session_state.selected_menu == "Lokasi 📍":
         [latitude, longitude], 
         popup="Stasiun Cuaca", 
         tooltip="Klik untuk info", 
-        icon=folium.Icon(icon="cloud", prefix="fa", color="blue")
+        icon=folium.Icon(icon="cloud", prefix="fa", color="red")
     ).add_to(m)
     st_folium(m, width=900, height=600)
     
-    github_image_url_1 = "https://raw.githubusercontent.com/username/repository/main/image1.jpg"
-    github_image_url_2 = "https://raw.githubusercontent.com/username/repository/main/image2.jpg"
+    github_image_url_1 = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"
+    github_image_url_2 = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/batam.jpg"
     
-    st.image(github_image_url_1, caption="Gambar Lokasi 1", use_container_width=True)
-    st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
+    st.image(github_image_url_1, caption="Politeknik Negeri Batam", use_container_width=True)
+    st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)
 
 elif st.session_state.selected_menu == "Data Cuaca 📊":
-
     df_history = get_history_data()
     if df_history is not None:
         st.subheader("📜 Riwayat Data Cuaca (10 Data Terakhir)")
