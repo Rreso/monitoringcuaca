@@ -89,7 +89,7 @@ if st.sidebar.button("Data Cuaca 📊", use_container_width=True):
 st.title(st.session_state.selected_menu)
 
 if st.session_state.selected_menu == "Dashboard 🏠":  
-        st.markdown(
+    st.markdown(
         """
         <style>
         .stApp{
@@ -99,6 +99,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         """,
         unsafe_allow_html=True
     )
+    
     data = get_latest_data()
     if data:
         # Tampilan bersampingan dengan tinggi yang sejajar
@@ -132,7 +133,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
 elif st.session_state.selected_menu == "Lokasi 📍":
-        st.markdown(
+    st.markdown(
         """
         <style>
         .stApp{
@@ -161,7 +162,7 @@ elif st.session_state.selected_menu == "Lokasi 📍":
     st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)
 
 elif st.session_state.selected_menu == "Data Cuaca 📊":
-        st.markdown(
+    st.markdown(
         """
         <style>
         .stApp{
