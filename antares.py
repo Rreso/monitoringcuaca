@@ -69,7 +69,7 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 menu_options = {
-    "🏠 <h2>Dashboard</h2>":"",
+    "🏠 Dashboard":"",
     "📍 Lokasi":"",
     "📊 Data Cuaca":""
 }
@@ -78,6 +78,27 @@ menu_selection = st.sidebar.radio("", list(menu_options.keys()), index=0, key="m
 st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Spasi agar lebih rapi
 
 st.title(menu_options[menu_selection])
+
+# CSS untuk mengubah tampilan radio button (padding + warna berbeda saat aktif)
+st.markdown(
+    f"""
+    <style>
+        div[data-baseweb="radio"] label {{
+            display: block;
+            padding: 15px 20px;
+            font-size: 22px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }}
+        div[data-baseweb="radio"] input:checked + label {{
+            background-color: #3498db !important;  /* Warna biru untuk yang aktif */
+            color: white !important;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 if menu_selection == "🏠 Dashboard":
     st.title("Dashboard Monitoring Cuaca")
