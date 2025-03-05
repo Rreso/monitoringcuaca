@@ -90,11 +90,17 @@ elif menu == "Lokasi":
     # Buat Peta
     m = folium.Map(location=[latitude, longitude], zoom_start=15)
     folium.Marker([latitude, longitude], popup="Stasiun Cuaca", tooltip="Klik untuk info").add_to(m)
-    st_folium(m, width=700, height=500)
+    st_folium(m, width=900, height=500)
     
     # Tampilkan gambar dari GitHub
-    github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  # Ganti dengan URL gambar Anda
-    st.image(github_image_url, caption="Gambar Lokasi", use_container_width=True)
+    github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  
+    github_image_url_2 = "https://raw.githubusercontent.com/username/repository/main/batam.jpeg"  # Ganti dengan URL gambar kedua Anda
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image(github_image_url_1, caption="Politeknik Negeri Batam", use_container_width=True)
+    with col2:
+        st.image(github_image_url_2, caption="Rooftop Gedung Utama", use_container_width=True)# Ganti dengan URL gambar Anda
 
 elif menu == "Data Cuaca":
     st.title("Data Cuaca")
