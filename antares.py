@@ -64,42 +64,25 @@ def get_history_data():
         return None
 
 # Menu navigasi di sidebar
-st.sidebar.markdown("""
-## 🌤 Sistem Monitoring Cuaca Politeknik Negeri Batam
-""", unsafe_allow_html=True)
+st.sidebar.title("🌤 Sistem Monitoring Cuaca")
 
-menu_options = {
-    "🏠 Dashboard":"",
-    "📍 Lokasi":"",
-    "📊 Data Cuaca":""
+menu_options = ["🏠 Dashboard", "📍 Lokasi", "📊 Data Cuaca"]
+menu_selection = st.sidebar.radio("Pilih Menu", menu_options, index=0)
+
+# --- Warna dan Padding untuk Tombol ---
+button_styles = {
+    "🏠 Dashboard": {"color": "blue", "padding": (10, 30)},
+    "📍 Lokasi": {"color": "green", "padding": (10, 30)},
+    "📊 Data Cuaca": {"color": "red", "padding": (10, 30)},
 }
 
-menu_selection = st.sidebar.radio("", list(menu_options.keys()), index=0, key="menu")
-st.sidebar.markdown("<br>", unsafe_allow_html=True)  # Spasi agar lebih rapi
+# Tombol menu di sidebar
+for menu in menu_options:
+    if st.sidebar.button(menu, key=menu, help=f"Buka {menu}", use_container_width=True):
+        menu_selection = menu
 
-st.title(menu_options[menu_selection])
-
-# CSS untuk mengubah tampilan radio button (padding + warna berbeda saat aktif)
-st.sidebar.markdown(
-    f"""
-    <style>
-        div[data-baseweb="radio"] label {{
-            display: block;
-            padding: 15px 20px;
-            font-size: 22px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }}
-        div[data-baseweb="radio"] input:checked + label {{
-            background-color: #3498db !important;  /* Warna biru untuk yang aktif */
-            color: white !important;
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
+# --- Tampilan Konten Berdasarkan Menu ---
+st.title(menu_selection)
 if menu_selection == "🏠 Dashboard":
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
