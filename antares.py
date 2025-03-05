@@ -108,8 +108,14 @@ if st.session_state.selected_menu == "Dashboard 🏠":
 
         # Cuaca Real Time
         st.header("🌤️ Cuaca Real Time")
-        st.markdown(f"<h2>🌦 <b>Decision Tree:</b> {data['Decision Tree']}</h2>", unsafe_allow_html=True)
-        st.markdown(f"<h2>☁ <b>Naive Bayes:</b> {data['Naive Bayes']}</h2>", unsafe_allow_html=True)
+        col4, col5 = st.columns(2)
+        
+        with col4:
+            st.markdown("<h3 style='text-align: center;'>🌳 Decision Tree</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Decision Tree']}</h2>", unsafe_allow_html=True)
+        with col5:
+            st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Naive Bayes']}</h2>", unsafe_allow_html=True)
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
