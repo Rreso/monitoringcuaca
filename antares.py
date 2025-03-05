@@ -66,12 +66,22 @@ def get_history_data():
 # Menu navigasi di sidebar
 st.sidebar.title("Menu")
 menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
-menu_selection = st.sidebar.radio(
-    "Pilih Menu", 
-    menu_options, 
-    index=0, 
-    format_func=lambda x: f"**{x}**"  # Membuat teks menu lebih besar
-)
+menu_selection = st.sidebar.radio("Pilih Menu", menu_options, index=0, key="menu")
+
+# Fungsi untuk menampilkan menu yang dipilih dengan padding lebih besar
+def sidebar_menu(name, selected):
+    if name == selected:
+        st.sidebar.markdown(f"### ➤ {name}  ")
+    else:
+        st.sidebar.markdown(f"### {name}")
+
+# Menampilkan menu di sidebar dengan padding untuk menu aktif
+st.sidebar.markdown("---")
+for menu in menu_options:
+    sidebar_menu(menu, menu_selection)
+st.sidebar.markdown("---")
+
+
 
 if menu_selection == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
