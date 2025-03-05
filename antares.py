@@ -115,7 +115,7 @@ elif menu == "Lokasi":
         tooltip="Klik untuk info", 
         icon=folium.Icon(icon="cloud", prefix="fa", color="red")
     ).add_to(m)
-    st_folium(m, width=900, height=600) 
+    st_folium(m, width=900, height=400) 
 
     # Tampilkan gambar dari GitHub
     github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  
