@@ -93,7 +93,7 @@ elif menu == "Lokasi":
     st_folium(m, width=700, height=500)
     
     # Tampilkan gambar dari GitHub
-    github_image_url = "https://raw.githubusercontent.com/username/repository/main/image.jpg"  # Ganti dengan URL gambar Anda
+    github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  # Ganti dengan URL gambar Anda
     st.image(github_image_url, caption="Gambar Lokasi", use_column_width=True)
 
 elif menu == "Data Cuaca":
