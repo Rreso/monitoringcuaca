@@ -88,18 +88,7 @@ if st.sidebar.button("Data Cuaca 📊", use_container_width=True):
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(st.session_state.selected_menu)
 
-if st.session_state.selected_menu == "Dashboard 🏠":
-    st.markdown(
-        """
-        <style>
-        .stApp{
-            background-color: #d0eced; /* Warna latar belakang */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-    
+if st.session_state.selected_menu == "Dashboard 🏠":    
     data = get_latest_data()
     if data:
         # Tampilan bersampingan dengan tinggi yang sejajar
