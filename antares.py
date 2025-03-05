@@ -64,21 +64,28 @@ def get_history_data():
         return None
 
 # Menu navigasi di sidebar
-st.sidebar.title("Menu")
-menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
-menu_selection = st.sidebar.radio("Pilih Menu", menu_options, index=0, key="menu")
+st.sidebar.markdown("""
+## 🟠 ANTARES
+""", unsafe_allow_html=True)
 
-# Fungsi untuk menampilkan menu yang dipilih dengan padding lebih besar
-def sidebar_menu(name, selected):
-    if name == selected:
-        st.sidebar.markdown(f"### ➤ {name}  ")
-    else:
-        st.sidebar.markdown(f"### {name}")
+menu_options = {
+    "🏠 Overview": "Dashboard",
+    "📊 Insight Hub": "Insight",
+    "📌 Usecase": "Usecase",
+    "🖥 Platform": "Platform",
+    "⚙ Settings": "Settings"
+}
 
-# Menampilkan menu di sidebar dengan padding untuk menu aktif
+menu_selection = st.sidebar.radio("Navigasi", list(menu_options.keys()), index=0)
+
+# Tampilan untuk menu yang aktif
 st.sidebar.markdown("---")
-for menu in menu_options:
-    sidebar_menu(menu, menu_selection)
+for menu, page in menu_options.items():
+    if menu == menu_selection:
+        st.sidebar.markdown(f"**➡ {menu}**")  # Memberi tanda untuk menu aktif
+    else:
+        st.sidebar.markdown(f"{menu}")
+
 st.sidebar.markdown("---")
 
 
