@@ -28,7 +28,7 @@ ACCESSKEY = st.secrets["ACCESSKEY"]
 PROJECT_NAME = "SistemMonitoringCuaca"
 DEVICE_NAME = "ESP32"
 URL_LATEST = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
-URL_HISTORY = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/cnt/la?fu=2&lim=10"
+URL_HISTORY = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}?rcn=4&ty=4&lim=10"
 
 headers = {
     "X-M2M-Origin": ACCESSKEY,
@@ -89,6 +89,38 @@ if df_history is not None:
     # Buat Grafik
     st.subheader("Grafik Perubahan Cuaca")
     st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
+else:
+    st.error("Gagal mengambil riwayat data dari Antares.")
+
+def get_antares_history():
+    try:
+        response = requests.get(URL_HISTORY, headers=headers, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        
+        # Ekstrak semua data dari response
+        history_list = []
+        for item in data["m2m:cnt"]["m2m:cin"]:
+            history_list.append(json.loads(item["con"]))  # Konversi JSON string ke dictionary
+
+        return history_list  # Mengembalikan list dari 10 data terakhir
+
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error fetching history data: {e}")
+        return None
+        
+# === Tampilkan Riwayat Data dalam Tabel ===
+history_data = get_antares_history()
+if history_data:
+    import pandas as pd
+    
+    df_history = pd.DataFrame(history_data)
+    st.subheader("Riwayat Data Cuaca (10 Data Terakhir)")
+    st.dataframe(df_history)  # Menampilkan tabel
+    
+    # === Grafik Data Cuaca ===
+    st.subheader("Grafik Perubahan Cuaca")
+    st.line_chart(df_history.set_index("timestamp")[["Suhu (°C)", "Kelembapan (%)", "Kecepatan Angin (Km/h)"]])
 else:
     st.error("Gagal mengambil riwayat data dari Antares.")
 
