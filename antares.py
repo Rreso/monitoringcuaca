@@ -42,18 +42,22 @@ def get_history_data():
         response.raise_for_status()
         data = response.json()
 
-        # Cek apakah "m2m:cin" tersedia dalam response
+        # 🛑 Debugging: Print JSON response
+        st.subheader("🔍 Debugging Response dari Antares")
+        st.json(data)  # Menampilkan response JSON di Streamlit
+        
+        # Cek apakah "m2m:cin" ada dalam response
         if "m2m:cin" not in data:
             st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
             return None
 
         history = []
-        for item in data["m2m:cin"]:  # Looping setiap item dalam history
+        for item in data["m2m:cin"]:
             content = json.loads(item["con"])  # Parsing JSON dalam "con"
             content["timestamp"] = item["ct"]  # Tambahkan timestamp dari "ct"
             history.append(content)
 
-        return pd.DataFrame(history)  # Konversi ke DataFrame untuk ditampilkan
+        return pd.DataFrame(history)
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching history data: {e}")
         return None
