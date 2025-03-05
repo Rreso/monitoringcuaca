@@ -63,44 +63,27 @@ def get_history_data():
         st.error(f"Error fetching history data: {e}")
         return None
 
-# Sidebar Menu dengan Tombol Navigasi
+# Menu navigasi dengan radio button
+menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
+menu_selection = st.radio("Pilih Menu:", menu_options, index=0, horizontal=True)
 
-
-# CSS untuk menyembunyikan radio button dan mengatur tampilan menu
 st.markdown(
     """
     <style>
         div[role="radiogroup"] label {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 20px !important;
+            padding: 10px 20px;
+            margin-right: 10px;
+        }
+        div[role="radiogroup"] label[data-selected="true"] {
+            background-color: #0078D7;
             color: white;
-            background-color: #444;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        div[role="radiogroup"] label:hover {
-            background-color: #666;
-        }
-        div[role="radiogroup"] label[data-baseweb="radio"] {
-            display: none;
-        }
-        div[aria-checked="true"] label {
-            background-color: #007BFF;
-            padding: 18px;
+            border-radius: 5px;
         }
     </style>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
-
-menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
-menu_selection = st.radio("", menu_options, index=0, label_visibility="collapsed")
 
 if menu_selection == "Dashboard":
     st.title("Dashboard Monitoring Cuaca")
@@ -125,7 +108,7 @@ elif menu_selection == "Lokasi":
         [latitude, longitude], 
         popup="Stasiun Cuaca", 
         tooltip="Klik untuk info", 
-        icon=folium.Icon(icon="map-marker", prefix="fa", color="red")
+        icon=folium.Icon(icon="cloud", prefix="fa", color="blue")
     ).add_to(m)
     st_folium(m, width=900, height=600)
     
