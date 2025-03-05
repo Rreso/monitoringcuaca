@@ -65,10 +65,12 @@ def get_history_data():
 
 # Sidebar Menu dengan Tombol Navigasi
 
-st.sidebar.markdown(
+
+# CSS untuk menyembunyikan radio button dan mengatur tampilan menu
+st.markdown(
     """
     <style>
-        .menu-button {
+        div[role="radiogroup"] label {
             display: block;
             width: 100%;
             padding: 15px;
@@ -77,16 +79,18 @@ st.sidebar.markdown(
             font-weight: bold;
             color: white;
             background-color: #444;
-            border: none;
             margin-bottom: 10px;
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .menu-button:hover {
+        div[role="radiogroup"] label:hover {
             background-color: #666;
         }
-        .menu-button-active {
+        div[role="radiogroup"] label[data-baseweb="radio"] {
+            display: none;
+        }
+        div[aria-checked="true"] label {
             background-color: #007BFF;
             padding: 18px;
         }
@@ -96,10 +100,9 @@ st.sidebar.markdown(
 )
 
 menu_options = ["Dashboard", "Lokasi", "Data Cuaca"]
-menu_selection = st.sidebar.selectbox("Pilih Menu", menu_options, index=0, label_visibility="collapsed")
+menu_selection = st.radio("", menu_options, index=0, label_visibility="collapsed")
 
 if menu_selection == "Dashboard":
-    st.sidebar.markdown('<button class="menu-button menu-button-active">Dashboard</button>', unsafe_allow_html=True)
     st.title("Dashboard Monitoring Cuaca")
     data = get_latest_data()
     if data:
@@ -113,18 +116,16 @@ if menu_selection == "Dashboard":
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
 elif menu_selection == "Lokasi":
-    st.sidebar.markdown('<button class="menu-button menu-button-active">Lokasi</button>', unsafe_allow_html=True)
     st.title("Lokasi Stasiun Cuaca")
-    
     latitude = 1.1187578768824524
     longitude = 104.04846548164217
     
-    m = folium.Map(location=[latitude, longitude], zoom_start=15, width="100%", height=600)
+    m = folium.Map(location=[latitude, longitude], zoom_start=15)
     folium.Marker(
         [latitude, longitude], 
         popup="Stasiun Cuaca", 
         tooltip="Klik untuk info", 
-        icon=folium.Icon(icon="cloud", prefix="fa", color="red")
+        icon=folium.Icon(icon="map-marker", prefix="fa", color="red")
     ).add_to(m)
     st_folium(m, width=900, height=600)
     
@@ -135,7 +136,6 @@ elif menu_selection == "Lokasi":
     st.image(github_image_url_2, caption="Gambar Lokasi 2", use_container_width=True)
 
 elif menu_selection == "Data Cuaca":
-    st.sidebar.markdown('<button class="menu-button menu-button-active">Data Cuaca</button>', unsafe_allow_html=True)
     st.title("Data Cuaca")
     df_history = get_history_data()
     if df_history is not None:
@@ -145,4 +145,5 @@ elif menu_selection == "Data Cuaca":
         st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
     else:
         st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
+
 
