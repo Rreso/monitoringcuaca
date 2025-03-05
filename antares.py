@@ -64,19 +64,29 @@ def get_history_data():
         return None
 
 # Menu navigasi di sidebar
+
 st.sidebar.title("🌤 Sistem Monitoring Cuaca")
 
-# --- Warna dan Padding untuk Tombol ---
-button_styles = {
-    "🏠 Dashboard": {"color": "blue", "padding": (10, 30)},
-    "📍 Lokasi": {"color": "green", "padding": (10, 30)},
-    "📊 Data Cuaca": {"color": "red", "padding": (10, 30)},
-}
+# State untuk menyimpan menu yang dipilih
+if "selected_menu" not in st.session_state:
+    st.session_state.selected_menu = "🏠 Dashboard"
 
-# Tombol menu di sidebar
-for menu in menu_options:
-    if st.sidebar.button(menu, key=menu, help=f"Buka {menu}", use_container_width=True):
-        menu_selection = menu
+# Fungsi untuk mengubah menu saat tombol ditekan
+def set_menu(menu_name):
+    st.session_state.selected_menu = menu_name
+
+# Tombol Sidebar
+if st.sidebar.button("🏠 Dashboard", use_container_width=True):
+    set_menu("🏠 Dashboard")
+
+if st.sidebar.button("📍 Lokasi", use_container_width=True):
+    set_menu("📍 Lokasi")
+
+if st.sidebar.button("📊 Data Cuaca", use_container_width=True):
+    set_menu("📊 Data Cuaca")
+
+# --- Tampilan Konten Berdasarkan Menu ---
+st.title(st.session_state.selected_menu)
 
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(menu_selection)
