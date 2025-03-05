@@ -108,10 +108,15 @@ elif menu == "Lokasi":
     longitude = 104.04846548164217
     
     # Buat Peta
-    m = folium.Map(location=[latitude, longitude], zoom_start=15)
-    folium.Marker([latitude, longitude], popup="Stasiun Cuaca", tooltip="Klik untuk info").add_to(m)
-    st_folium(m, width=700, height=500)
-    
+    m = folium.Map(location=[latitude, longitude], zoom_start=15, width="100%", height=600)
+    folium.Marker(
+        [latitude, longitude], 
+        popup="Stasiun Cuaca", 
+        tooltip="Klik untuk info", 
+        icon=folium.Icon(icon="cloud", prefix="fa", color="red")
+    ).add_to(m)
+    st_folium(m, width=900, height=600) 
+
     # Tampilkan gambar dari GitHub
     github_image_url = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/politeknik.jpg"  
     github_image_url_2 = "https://raw.githubusercontent.com/Rreso/monitoringcuaca/main/batam.jpg"  # Ganti dengan URL gambar kedua Anda
