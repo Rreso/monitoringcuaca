@@ -4,6 +4,8 @@ import pandas as pd
 import json
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
+import folium
+from streamlit_folium import st_folium
 
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
@@ -80,9 +82,20 @@ if menu == "Dashboard":
 
 elif menu == "Lokasi":
     st.title("Lokasi Stasiun Cuaca")
-    st.write("🗺 Lokasi sensor pemantauan cuaca saat ini")
-    st.map(pd.DataFrame({'lat': [1.1187657269561744], 'lon': [104.04845501288223]}))  # Ganti dengan koordinat aktual
- 
+    
+    # Masukkan koordinat lokasi
+    latitude = 1.1187578768824524  # Sesuaikan dengan lokasi stasiun cuaca
+    longitude = 104.04846548164217
+    
+    # Buat Peta
+    m = folium.Map(location=[latitude, longitude], zoom_start=15)
+    folium.Marker([latitude, longitude], popup="Stasiun Cuaca", tooltip="Klik untuk info").add_to(m)
+    st_folium(m, width=700, height=500)
+    
+    # Tampilkan gambar dari GitHub
+    github_image_url = "https://raw.githubusercontent.com/username/repository/main/image.jpg"  # Ganti dengan URL gambar Anda
+    st.image(github_image_url, caption="Gambar Lokasi", use_column_width=True)
+
 elif menu == "Data Cuaca":
     st.title("Data Cuaca")
     df_history = get_history_data()
