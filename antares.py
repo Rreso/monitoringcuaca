@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, confusion_matrix, mean_squared_error
 
 # ======= 1. Load Data dari Excel =======
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
@@ -193,9 +194,46 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         with co25:
             st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{nb_result}</h2>", unsafe_allow_html=True)
+
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        
+        y1_pred = dt_model.predict(X_test)  # Decision Tree
+        y2_pred = nb_model.predict(X_test)  # Naïve Bayes
+    
+        # === AKURASI ===
+        accuracy_dt = accuracy_score(y1_test, y1_pred)    
+        accuracy_nb = accuracy_score(y2_test, y2_pred)
+
+        # === CONFUSION MATRIX ===
+        conf_matrix_dt = confusion_matrix(y1_test, y1_pred)
+        conf_matrix_nb = confusion_matrix(y2_test, y2_pred)
+
+        # === MSE & RMSE ===
+        mse_dt = mean_squared_error(y1_test, y1_pred)
+        rmse_dt = np.sqrt(mse_dt)
+
+        mse_nb = mean_squared_error(y2_test, y2_pred)
+        rmse_nb = np.sqrt(mse_nb)
+
+        st.subheader("📊 Evaluasi Model")
+        st.write(f"🎯 **Akurasi Decision Tree**: {accuracy_dt:.2f}")
+        st.write(f"🎯 **Akurasi Naïve Bayes**: {accuracy_nb:.2f}")
+
+        st.write("📌 **Confusion Matrix Decision Tree:**")
+        st.write(conf_matrix_dt)
+
+        st.write("📌 **Confusion Matrix Naïve Bayes:**")
+        st.write(conf_matrix_nb)
+
+        st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
+        st.write(f"📉 **RMSE Decision Tree**: {rmse_dt:.4f}")
+
+        st.write(f"📉 **MSE Naïve Bayes**: {mse_nb:.4f}")
+        st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
     
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
+
 
 elif st.session_state.selected_menu == "Lokasi 📍":
     st.markdown(
