@@ -263,9 +263,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         unsafe_allow_html=True
     )
     
-    data = get_latest_data()
-    if data:
-         y1_pred = dt_model.predict(X_test)  # Decision Tree
+        y1_pred = dt_model.predict(X_test)  # Decision Tree
         y2_pred = nb_model.predict(X_test)  # Naïve Bayes
     
         # === AKURASI ===
