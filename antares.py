@@ -154,7 +154,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
             st.markdown("<h3 style='text-align: center;'>🌪️ Angin</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Kecepatan Angin (Km/h)']:.2f} km/h</h2>", unsafe_allow_html=True)
         
-        st.markdown("<br><br><br>", unsafe_allow_html=True)  
+        st.markdown("<br><br>", unsafe_allow_html=True)  
         
         # Cuaca Real Time
         st.header("Cuaca Realtime Area Polibatam 🌤️")
@@ -166,6 +166,8 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         with col5:
             st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Naive Bayes']}</h2>", unsafe_allow_html=True)
+
+         st.markdown("<br><br>", unsafe_allow_html=True)  
 
         # Prediksi Cuaca 30 Menit Kedepan
         suhu = data['Suhu (°C)']
