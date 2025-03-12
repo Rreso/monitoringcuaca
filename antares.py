@@ -40,7 +40,7 @@ if required_columns.issubset(df.columns):
     nb_model = GaussianNB()
     nb_model.fit(X_train, y2_train)
 
-    st.success("✅ Model Decision Tree & Naive Bayes telah dilatih!")
+    st.success("✅ Model Prediksi berhasil dilatih!")
 else:
     st.error("⚠️ Data tidak memiliki format yang sesuai!")
 
