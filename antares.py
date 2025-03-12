@@ -12,8 +12,31 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 
-df = pd.read_excel("Data.xlsx", engine="openpyxl")  # Pastikan openpyxl terinstal
-print(df.head())
+# ======= 1. Load Data dari Excel =======
+df = pd.read_excel("Data.xlsx", engine="openpyxl")
+
+# Pastikan data memiliki kolom yang sesuai
+if {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Cuaca'}.issubset(df.columns):
+    le = LabelEncoder()
+    df['Cuaca'] = le.fit_transform(df['Cuaca'])  # Konversi label cuaca ke angka
+
+    # Pisahkan fitur dan target
+    X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
+    y = df['Cuaca']
+
+    # Split data training dan testing
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Buat model Decision Tree & Naive Bayes
+    dt_model = DecisionTreeClassifier()
+    dt_model.fit(X_train, y_train)
+
+    nb_model = GaussianNB()
+    nb_model.fit(X_train, y_train)
+
+    st.success("✅ Model Decision Tree & Naive Bayes telah dilatih!")
+else:
+    st.error("⚠️ Data tidak memiliki format yang sesuai!")
 
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
@@ -137,6 +160,30 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         with col5:
             st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Naive Bayes']}</h2>", unsafe_allow_html=True)
+
+        # Prediksi Cuaca 30 Menit Kedepan
+        suhu = data['Suhu (°C)']
+        kelembapan = data['Kelembapan (%)']
+        angin = data['Kecepatan Angin (Km/h)']
+
+        # Gunakan model untuk prediksi cuaca berdasarkan data real-time
+        input_data = [[suhu, kelembapan, angin]]
+        dt_pred = dt_model.predict(input_data)
+        nb_pred = nb_model.predict(input_data)
+
+        # Konversi hasil prediksi ke bentuk label
+        dt_result = le.inverse_transform(dt_pred)[0]
+        nb_result = le.inverse_transform(nb_pred)[0]
+
+        # Tambahkan hasil prediksi ke tampilan dashboard
+        co24, co25 = st.columns(3)
+        with co24:
+        st.markdown("<h3 style='text-align: center;'>🌳 Decision Tree</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{dt_result}</h2>", unsafe_allow_html=True)
+        with co25:
+        st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{nb_result}</h2>", unsafe_allow_html=True)
+    
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
