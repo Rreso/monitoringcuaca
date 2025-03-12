@@ -14,21 +14,25 @@ from sklearn.preprocessing import LabelEncoder
 
 # ======= 1. Load Data dari Excel =======
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
+st.write("Kolom dalam dataset:", df.columns)
+
+# Pastikan semua kolom yang dibutuhkan ada
+required_columns = {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision  Tree', 'Naïve Bayes'}
 
 # Pastikan data memiliki kolom yang sesuai
-if {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision Tree', 'Naïve Bayes'}.issubset(df.columns):
+if required_columns.issubset(df.columns):
     le = LabelEncoder()
-    df[['Decision Tree', 'Naïve Bayes']] = df[['Decision Tree', 'Naïve Bayes']].apply(le.fit_transform)
+    df[['Decision  Tree', 'Naïve Bayes']] = df[['Decision  Tree', 'Naïve Bayes']].apply(le.fit_transform)
 
     # Pisahkan fitur dan target
     X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
-    y1 = df['Decision Tree']
+    y1 = df['Decision  Tree']
     y2 = df['Naïve Bayes']
     
     # Split data training dan testing
-    X_train, X_test, y1_train, y1_test = train_test_split(X, y1, test_size=0.2, random_state=42)
-
-    X_train, X_test, y2_train, y2_test = train_test_split(X, y2, test_size=0.2, random_state=42)
+    X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
+        X, y1, y2, test_size=0.2, random_state=42
+    )
 
     # Buat model Decision Tree & Naive Bayes
     dt_model = DecisionTreeClassifier()
