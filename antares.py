@@ -180,11 +180,11 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         co24, co25 = st.columns(3)
         
         with co24:
-        st.markdown("<h3 style='text-align: center;'>🌳 Decision Tree</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{dt_result}</h2>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align: center;'>🌳 Decision Tree</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{dt_result}</h2>", unsafe_allow_html=True)
         with co25:
-        st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{nb_result}</h2>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{nb_result}</h2>", unsafe_allow_html=True)
     
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
