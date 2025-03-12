@@ -41,10 +41,6 @@ if required_columns.issubset(df.columns):
     nb_model = GaussianNB()
     nb_model.fit(X_train, y2_train)
 
-    st.success("✅ Model Prediksi berhasil dilatih!")
-else:
-    st.error("⚠️ Data tidak memiliki format yang sesuai!")
-
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
 retry = Retry(total=5, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
