@@ -123,6 +123,9 @@ if st.sidebar.button("Lokasi 📍", use_container_width=True):
 if st.sidebar.button("Data Cuaca 📊", use_container_width=True):
     set_menu("Data Cuaca 📊")
 
+if st.sidebar.button("Evaluasi Model 📋", use_container_width=True):
+    set_menu("Evaluasi Model 📋")
+
 # --- Tampilan Konten Berdasarkan Menu ---
 st.title(st.session_state.selected_menu)
 
@@ -197,40 +200,6 @@ if st.session_state.selected_menu == "Dashboard 🏠":
 
         st.markdown("<br><br>", unsafe_allow_html=True)
         
-        y1_pred = dt_model.predict(X_test)  # Decision Tree
-        y2_pred = nb_model.predict(X_test)  # Naïve Bayes
-    
-        # === AKURASI ===
-        accuracy_dt = accuracy_score(y1_test, y1_pred)    
-        accuracy_nb = accuracy_score(y2_test, y2_pred)
-
-        # === CONFUSION MATRIX ===
-        conf_matrix_dt = confusion_matrix(y1_test, y1_pred)
-        conf_matrix_nb = confusion_matrix(y2_test, y2_pred)
-
-        # === MSE & RMSE ===
-        mse_dt = mean_squared_error(y1_test, y1_pred)
-        rmse_dt = np.sqrt(mse_dt)
-
-        mse_nb = mean_squared_error(y2_test, y2_pred)
-        rmse_nb = np.sqrt(mse_nb)
-
-        st.subheader("📊 Evaluasi Model")
-        st.write(f"🎯 **Akurasi Decision Tree**: {accuracy_dt:.2f}")
-        st.write(f"🎯 **Akurasi Naïve Bayes**: {accuracy_nb:.2f}")
-
-        st.write("📌 **Confusion Matrix Decision Tree:**")
-        st.write(conf_matrix_dt)
-
-        st.write("📌 **Confusion Matrix Naïve Bayes:**")
-        st.write(conf_matrix_nb)
-
-        st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
-        st.write(f"📉 **RMSE Decision Tree**: {rmse_dt:.4f}")
-
-        st.write(f"📉 **MSE Naïve Bayes**: {mse_nb:.4f}")
-        st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
-    
     else:
         st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
 
@@ -281,6 +250,58 @@ elif st.session_state.selected_menu == "Data Cuaca 📊":
         st.dataframe(df_history)
         st.subheader("📈 Grafik Perubahan Cuaca")
         st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
+
+elif st.session_state.selected_menu == "Evaluasi Model 📋":
+        st.markdown(
+        """
+        <style>
+        .stApp{
+            background-color: #d0eced; /* Warna latar belakang */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    data = get_latest_data()
+    if data:
+         y1_pred = dt_model.predict(X_test)  # Decision Tree
+        y2_pred = nb_model.predict(X_test)  # Naïve Bayes
+    
+        # === AKURASI ===
+        accuracy_dt = accuracy_score(y1_test, y1_pred)    
+        accuracy_nb = accuracy_score(y2_test, y2_pred)
+
+        # === CONFUSION MATRIX ===
+        conf_matrix_dt = confusion_matrix(y1_test, y1_pred)
+        conf_matrix_nb = confusion_matrix(y2_test, y2_pred)
+
+        # === MSE & RMSE ===
+        mse_dt = mean_squared_error(y1_test, y1_pred)
+        rmse_dt = np.sqrt(mse_dt)
+
+        mse_nb = mean_squared_error(y2_test, y2_pred)
+        rmse_nb = np.sqrt(mse_nb)
+
+        st.subheader("📊 Evaluasi Model")
+        st.write(f"🎯 **Akurasi Decision Tree**: {accuracy_dt:.2f}")
+        st.write(f"🎯 **Akurasi Naïve Bayes**: {accuracy_nb:.2f}")
+
+        st.write("📌 **Confusion Matrix Decision Tree:**")
+        st.write(conf_matrix_dt)
+
+        st.write("📌 **Confusion Matrix Naïve Bayes:**")
+        st.write(conf_matrix_nb)
+
+        st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
+        st.write(f"📉 **RMSE Decision Tree**: {rmse_dt:.4f}")
+
+        st.write(f"📉 **MSE Naïve Bayes**: {mse_nb:.4f}")
+        st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
+
+            else:
+        st.error("⚠️ Gagal mengambil data terbaru dari Antares.")
+                
     else:
         st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
 
