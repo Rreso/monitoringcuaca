@@ -165,9 +165,9 @@ if st.session_state.selected_menu == "Dashboard 🏠":
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Naive Bayes']}</h2>", unsafe_allow_html=True)
 
         # Prediksi Cuaca 30 Menit Kedepan
-        suhu = {data['Suhu (°C)']
-        kelembapan = {data['Kelembapan (%)']
-        angin = {data['Kecepatan Angin (Km/h)']
+        suhu = data['Suhu (°C)']
+        kelembapan = data['Kelembapan (%)']
+        angin = data['Kecepatan Angin (Km/h)']
 
         # Gunakan model untuk prediksi cuaca berdasarkan data real-time
         input_data = [[suhu, kelembapan, angin]]
