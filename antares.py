@@ -12,6 +12,9 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 
+df = pd.read_excel("Data.xlsx", engine="openpyxl")  # Pastikan openpyxl terinstal
+print(df.head())
+
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
 retry = Retry(total=5, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
