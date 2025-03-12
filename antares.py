@@ -16,9 +16,9 @@ from sklearn.preprocessing import LabelEncoder
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
 
 # Pastikan data memiliki kolom yang sesuai
-if {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision Tree', 'Naïve Bayes"}.issubset(df.columns):
+if {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision Tree', 'Naïve Bayes'}.issubset(df.columns):
     le = LabelEncoder()
-    df['Cuaca'] = le.fit_transform(df['Cuaca'])  # Konversi label cuaca ke angka
+    df['Decision Tree','Naïve Bayes'] = le.fit_transform(df['Decision Tree', 'Naïve Bayes'])  # Konversi label cuaca ke angka
 
     # Pisahkan fitur dan target
     X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
