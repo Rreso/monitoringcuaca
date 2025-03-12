@@ -250,6 +250,10 @@ elif st.session_state.selected_menu == "Data Cuaca 📊":
         st.dataframe(df_history)
         st.subheader("📈 Grafik Perubahan Cuaca")
         st.line_chart(df_history.set_index("timestamp")[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']])
+                        
+    else:
+        st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
+
 
 elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.markdown(
@@ -296,9 +300,6 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
 
         st.write(f"📉 **MSE Naïve Bayes**: {mse_nb:.4f}")
         st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
-                
-    else:
-        st.warning("⚠️ Tidak ada data riwayat yang tersedia di Antares.")
 
 
 
