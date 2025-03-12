@@ -177,7 +177,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
 
         # Tambahkan hasil prediksi ke tampilan dashboard
         st.header("Prediksi Cuaca 30 Menit Kedepan 🌤️")
-        co24, co25 = st.columns(3)
+        co24, co25 = st.columns(2)
         
         with co24:
             st.markdown("<h3 style='text-align: center;'>🌳 Decision Tree</h3>", unsafe_allow_html=True)
