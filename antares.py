@@ -167,7 +167,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
             st.markdown("<h3 style='text-align: center;'>🎲 Naive Bayes</h3>", unsafe_allow_html=True)
             st.markdown(f"<h2 style='text-align: center; font-weight: bold;'>{data['Naive Bayes']}</h2>", unsafe_allow_html=True)
 
-         st.markdown("<br><br>", unsafe_allow_html=True)  
+        st.markdown("<br><br>", unsafe_allow_html=True)  
 
         # Prediksi Cuaca 30 Menit Kedepan
         suhu = data['Suhu (°C)']
