@@ -14,7 +14,6 @@ from sklearn.preprocessing import LabelEncoder
 
 # ======= 1. Load Data dari Excel =======
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
-st.write("Kolom dalam dataset:", df.columns)
 
 # Pastikan semua kolom yang dibutuhkan ada
 required_columns = {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision  Tree', 'Naïve Bayes'}
