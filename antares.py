@@ -7,6 +7,11 @@ from requests.packages.urllib3.util.retry import Retry
 import folium
 from streamlit_folium import st_folium
 
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import LabelEncoder
+
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
 retry = Retry(total=5, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
