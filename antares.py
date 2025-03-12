@@ -16,23 +16,26 @@ from sklearn.preprocessing import LabelEncoder
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
 
 # Pastikan data memiliki kolom yang sesuai
-if {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Cuaca'}.issubset(df.columns):
+if {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision Tree', 'Naïve Bayes"}.issubset(df.columns):
     le = LabelEncoder()
     df['Cuaca'] = le.fit_transform(df['Cuaca'])  # Konversi label cuaca ke angka
 
     # Pisahkan fitur dan target
     X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
-    y = df['Cuaca']
-
+    y1 = df['Decision Tree']
+    y2 = df['Naïve Bayes']
+    
     # Split data training dan testing
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y1_train, y1_test = train_test_split(X, y1, test_size=0.2, random_state=42)
+
+    X_train, X_test, y2_train, y2_test = train_test_split(X, y2, test_size=0.2, random_state=42)
 
     # Buat model Decision Tree & Naive Bayes
     dt_model = DecisionTreeClassifier()
-    dt_model.fit(X_train, y_train)
+    dt_model.fit(X_train, y1_train)
 
     nb_model = GaussianNB()
-    nb_model.fit(X_train, y_train)
+    nb_model.fit(X_train, y2_train)
 
     st.success("✅ Model Decision Tree & Naive Bayes telah dilatih!")
 else:
