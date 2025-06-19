@@ -7,3 +7,4 @@ openpyxl
 xlrd
 scikit-learn
 numpy
+matplotlib.pyplo
