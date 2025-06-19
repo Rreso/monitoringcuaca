@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import folium
+import seaborn as sns
 from streamlit_folium import st_folium
 import numpy as np
 from sklearn.model_selection import train_test_split
