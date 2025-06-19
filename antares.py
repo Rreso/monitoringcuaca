@@ -297,8 +297,16 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
 
         st.write("📌 **Confusion Matrix Decision Tree:**")
         fig1, ax1 = plt.subplots(figsize=(2,1))
-        sns.heatmap(conf_matrix_dt, annot=True, fmt='d', cmap='Blues',
-                xticklabels=le.classes_, yticklabels=le.classes_, ax=ax1)
+    
+        sns.heatmap(
+            conf_matrix_dt,
+            annot=True,
+            fmt='d',
+            cmap='Blues',
+            xticklabels=le.classes_,
+            yticklabels=le.classes_,
+            annot_kws={'size': 6}  # 🔽 ukuran font angka di dalam kotak
+        )
         ax1.set_title("Confusion Matrix - Decision Tree", fontsize=8)
         ax1.set_xlabel("Predicted Label", fontsize=6)
         ax1.set_ylabel("True Label", fontsize=6)
@@ -315,7 +323,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"🌳 **Decision Tree** - Rata-rata Akurasi CV: {mean_cv_dt:.2f}")
 
         st.subheader("🎲 Metode Naive Bayes")
-        st.write(f"🎯 **Akurasi Naïve Bayes**: {accuracy_nb:.2f}")
+        st.write(f"🎯 **Akurasi Naive Bayes**: {accuracy_nb:.2f}")
 
         st.write("📌 **Confusion Matrix Naïve Bayes:**")
         fig2, ax2 = plt.subplots()
