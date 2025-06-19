@@ -308,7 +308,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"📉 **RMSE Decision Tree**: {rmse_dt:.4f}")
 
         st.write("🌳 **Decision Tree** - Akurasi per fold:", cv_scores_dt)
-        st.write(f"🌳 **Decision Tree** - Rata-rata Akurasi CV: {mean_cv_dt:.2f}")
+        st.write(f"🌳 **Decision Tree** - Rata-rata Akurasi CV: {mean_cv_dt:.3f}")
 
         st.subheader("🎲 Metode Naive Bayes")
         st.write(f"🎯 **Akurasi Naive Bayes**: {accuracy_nb:.2f}")
@@ -326,6 +326,6 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
 
         st.write("🎲 **Naïve Bayes** - Akurasi per fold:", cv_scores_nb)
-        st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV: {mean_cv_nb:.2f}")
+        st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV: {mean_cv_nb:.3f}")
 
 
