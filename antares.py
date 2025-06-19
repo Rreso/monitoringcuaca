@@ -299,9 +299,9 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         fig1, ax1 = plt.subplots()
         sns.heatmap(conf_matrix_dt, annot=True, fmt='d', cmap='Greens',
                 xticklabels=le.classes_, yticklabels=le.classes_, ax=ax1)
-        ax2.set_title("Confusion Matrix - Decision Tree")
-        ax2.set_xlabel("Predicted Label")
-        ax2.set_ylabel("True Label")
+        ax1.set_title("Confusion Matrix - Decision Tree")
+        ax1.set_xlabel("Predicted Label")
+        ax1.set_ylabel("True Label")
         st.pyplot(fig1)
 
         st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
