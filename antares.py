@@ -12,6 +12,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, mean_squared_error
+from sklearn.model_selection import cross_val_score
 
 # ======= 1. Load Data dari Excel =======
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
@@ -281,21 +282,48 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         mse_nb = mean_squared_error(y2_test, y2_pred)
         rmse_nb = np.sqrt(mse_nb)
 
-        st.subheader("📊 Evaluasi Model")
+        # Cross Validation untuk Decision Tree
+        cv_scores_dt = cross_val_score(DecisionTreeClassifier(), X, y1, cv=5)
+        mean_cv_dt = np.mean(cv_scores_dt)
+
+        # Cross Validation untuk Naive Bayes
+        cv_scores_nb = cross_val_score(GaussianNB(), X, y2, cv=5)
+        mean_cv_nb = np.mean(cv_scores_nb)
+
+        st.subheader("🌳 Metode Decision Tree")
         st.write(f"🎯 **Akurasi Decision Tree**: {accuracy_dt:.2f}")
-        st.write(f"🎯 **Akurasi Naïve Bayes**: {accuracy_nb:.2f}")
 
         st.write("📌 **Confusion Matrix Decision Tree:**")
-        st.write(conf_matrix_dt)
-
-        st.write("📌 **Confusion Matrix Naïve Bayes:**")
-        st.write(conf_matrix_nb)
+        fig1, ax1 = plt.subplots()
+        sns.heatmap(conf_matrix_dt, annot=True, fmt='d', cmap='Blues',
+                xticklabels=le.classes_, yticklabels=le.classes_, ax=ax1)
+        ax1.set_title("Confusion Matrix - Decision Tree")
+        ax1.set_xlabel("Predicted Label")
+        ax1.set_ylabel("True Label")
+        st.pyplot(fig1)
 
         st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
         st.write(f"📉 **RMSE Decision Tree**: {rmse_dt:.4f}")
 
+        st.write("🌳 **Decision Tree** - Akurasi per fold:", cv_scores_dt)
+        st.write(f"🌳 **Decision Tree** - Rata-rata Akurasi CV: {mean_cv_dt:.2f}")
+
+        st.subheader("🎲 Metode Naive Bayes")
+        st.write(f"🎯 **Akurasi Naïve Bayes**: {accuracy_nb:.2f}")
+
+        st.write("📌 **Confusion Matrix Naïve Bayes:**")
+        fig2, ax2 = plt.subplots()
+        sns.heatmap(conf_matrix_nb, annot=True, fmt='d', cmap='Greens',
+                xticklabels=le.classes_, yticklabels=le.classes_, ax=ax2)
+        ax2.set_title("Confusion Matrix - Naïve Bayes")
+        ax2.set_xlabel("Predicted Label")
+        ax2.set_ylabel("True Label")
+        st.pyplot(fig2)
+
         st.write(f"📉 **MSE Naïve Bayes**: {mse_nb:.4f}")
         st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
 
+        st.write("🎲 **Naïve Bayes** - Akurasi per fold:", cv_scores_nb)
+        st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV: {mean_cv_nb:.2f}")
 
 
