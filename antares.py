@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 import json
+import matplotlib.pyplot as plt
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import folium
