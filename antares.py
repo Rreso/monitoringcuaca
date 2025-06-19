@@ -296,7 +296,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"🎯 **Akurasi Decision Tree**: {accuracy_dt:.2f}")
 
         st.write("📌 **Confusion Matrix Decision Tree:**")
-        fig1, ax1 = plt.subplots(figsize=(4,3))
+        fig1, ax1 = plt.subplots(figsize=(2,1))
         sns.heatmap(conf_matrix_dt, annot=True, fmt='d', cmap='Blues',
                 xticklabels=le.classes_, yticklabels=le.classes_, ax=ax1)
         ax1.set_title("Confusion Matrix - Decision Tree")
