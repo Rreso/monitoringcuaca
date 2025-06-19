@@ -296,24 +296,12 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"🎯 **Akurasi Decision Tree**: {accuracy_dt:.2f}")
 
         st.write("📌 **Confusion Matrix Decision Tree:**")
-        fig1, ax1 = plt.subplots(figsize=(2,1))
-    
-        sns.heatmap(
-            conf_matrix_dt,
-            annot=True,
-            fmt='d',
-            cmap='Blues',
-            xticklabels=le.classes_,
-            yticklabels=le.classes_,
-            annot_kws={'size': 6}  # 🔽 ukuran font angka di dalam kotak
-        )
-        ax1.set_title("Confusion Matrix - Decision Tree", fontsize=8)
-        ax1.set_xlabel("Predicted Label", fontsize=6)
-        ax1.set_ylabel("True Label", fontsize=6)
-
-        # Perkecil ukuran font label kelas di sumbu X dan Y
-        ax1.tick_params(axis='both', labelsize=6)
-    
+        fig1, ax1 = plt.subplots()
+        sns.heatmap(conf_matrix_dt, annot=True, fmt='d', cmap='Greens',
+                xticklabels=le.classes_, yticklabels=le.classes_, ax=ax2)
+        ax2.set_title("Confusion Matrix - Decision Tree")
+        ax2.set_xlabel("Predicted Label")
+        ax2.set_ylabel("True Label")
         st.pyplot(fig1)
 
         st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
@@ -325,11 +313,11 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.subheader("🎲 Metode Naive Bayes")
         st.write(f"🎯 **Akurasi Naive Bayes**: {accuracy_nb:.2f}")
 
-        st.write("📌 **Confusion Matrix Naïve Bayes:**")
+        st.write("📌 **Confusion Matrix Naive Bayes:**")
         fig2, ax2 = plt.subplots()
         sns.heatmap(conf_matrix_nb, annot=True, fmt='d', cmap='Greens',
                 xticklabels=le.classes_, yticklabels=le.classes_, ax=ax2)
-        ax2.set_title("Confusion Matrix - Naïve Bayes")
+        ax2.set_title("Confusion Matrix - Naive Bayes")
         ax2.set_xlabel("Predicted Label")
         ax2.set_ylabel("True Label")
         st.pyplot(fig2)
