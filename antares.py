@@ -302,6 +302,10 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         ax1.set_title("Confusion Matrix - Decision Tree", fontsize=8)
         ax1.set_xlabel("Predicted Label", fontsize=6)
         ax1.set_ylabel("True Label", fontsize=6)
+
+        # Perkecil ukuran font label kelas di sumbu X dan Y
+        ax1.tick_params(axis='both', labelsize=6)
+    
         st.pyplot(fig1)
 
         st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
