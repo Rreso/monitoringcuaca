@@ -172,7 +172,7 @@ if st.session_state.selected_menu == "Dashboard 🏠":
             y2 = df['Naïve Bayes']
             
         X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
-            X, y1, y2, test_size=0.2, shuffle=falese
+            X, y1, y2, test_size=0.2, shuffle=false
             )
         
         # Gunakan model untuk prediksi cuaca berdasarkan data real-time
