@@ -19,10 +19,6 @@ from sklearn.naive_bayes import ComplementNB
 from sklearn.tree import DecisionTreeClassifier
 
 
-
-
-
-
 # ======= 1. Load Data dari Excel =======
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
 
@@ -45,11 +41,6 @@ if required_columns.issubset(df.columns):
     X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
 
     # Buat model Decision Tree & Naive Bayes
-    dt_model = DecisionTreeClassifier()
-    dt_model.fit(X_train, y1_train)
-
-    nb_model = GaussianNB()
-    nb_model.fit(X_train, y2_train)
 
     # Variasi model Decision Tree
     dt_gini = DecisionTreeClassifier(criterion='gini', random_state=42)
