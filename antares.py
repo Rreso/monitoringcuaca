@@ -155,6 +155,10 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         kelembapan = data['Kelembapan (%)']
         angin = data['Kecepatan Angin (Km/h)']
 
+        X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
+            X, y1, y2, test_size=0.2, shuffle=falese
+            )
+        
         # Gunakan model untuk prediksi cuaca berdasarkan data real-time
         input_data = [[suhu, kelembapan, angin]]
         dt_pred = dt_model.predict(input_data)
