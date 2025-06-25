@@ -361,8 +361,8 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
  
          
-        st.subheader("🎲 Naive Bayes berdasarkan rasio data")
-        st.write(f"Akurasi Naive Bayes (rasio uji {int(split_ratio*100)}%): {acc_nb:.2f}")
+        st.subheader("🎲 Naive Bayes Cross Validation")
+
         st.write("🎲 Naive Bayes - Akurasi CV 5-fold:", cv_nb_5)
         st.write("🎲 Naive Bayes - Akurasi CV 10-fold:", cv_nb_10)
         st.write(f"Rata-rata CV 5-fold: {cv_nb_5.mean():.3f}")
