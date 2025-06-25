@@ -154,7 +154,23 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         suhu = data['Suhu (°C)']
         kelembapan = data['Kelembapan (%)']
         angin = data['Kecepatan Angin (Km/h)']
+        
+         # ======= 1. Load Data dari Excel =======
+        df = pd.read_excel("Data.xlsx", engine="openpyxl")
 
+        # Pastikan semua kolom yang dibutuhkan ada
+        required_columns = {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision  Tree', 'Naïve Bayes'}
+
+        # Pastikan data memiliki kolom yang sesuai
+        if required_columns.issubset(df.columns):
+            le = LabelEncoder()
+            df[['Decision  Tree', 'Naïve Bayes']] = df[['Decision  Tree', 'Naïve Bayes']].apply(le.fit_transform)
+
+            # Pisahkan fitur dan target
+            X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
+            y1 = df['Decision  Tree']
+            y2 = df['Naïve Bayes']
+            
         X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
             X, y1, y2, test_size=0.2, shuffle=falese
             )
