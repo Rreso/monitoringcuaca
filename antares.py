@@ -19,57 +19,7 @@ from sklearn.naive_bayes import ComplementNB
 from sklearn.tree import DecisionTreeClassifier
 
 
-# ======= 1. Load Data dari Excel =======
-df = pd.read_excel("Data.xlsx", engine="openpyxl")
 
-# Pastikan semua kolom yang dibutuhkan ada
-required_columns = {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision  Tree', 'Naïve Bayes'}
-
-# Pastikan data memiliki kolom yang sesuai
-if required_columns.issubset(df.columns):
-    le = LabelEncoder()
-    df[['Decision  Tree', 'Naïve Bayes']] = df[['Decision  Tree', 'Naïve Bayes']].apply(le.fit_transform)
-
-    # Pisahkan fitur dan target
-    X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
-    y1 = df['Decision  Tree']
-    y2 = df['Naïve Bayes']
-
-    split_ratio == [0.2, 0.3, 0.4], format_func=lambda x: f"{int(x*100)}%"
-    X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
-
-    # Buat model Decision Tree & Naive Bayes
-    dt_model = DecisionTreeClassifier()
-    dt_model.fit(X_train, y1_train)
-
-    nb_model = GaussianNB()
-    nb_model.fit(X_train, y2_train)
-
-    # Variasi model Decision Tree
-    dt_gini = DecisionTreeClassifier(criterion='gini', random_state=42)
-    dt_entropy = DecisionTreeClassifier(criterion='entropy', random_state=42)
-
-    dt_gini.fit(X_train, y1_train)
-    dt_entropy.fit(X_train, y1_train)
-
-    # Evaluasi
-    y_pred_gini = dt_gini.predict(X_test)
-    y_pred_entropy = dt_entropy.predict(X_test)
-
-    acc_gini = accuracy_score(y1_test, y_pred_gini)
-    acc_entropy = accuracy_score(y1_test, y_pred_entropy)
-    
-    # Variasi model Naive Bayes 
-    nb_model_complement = GaussianNB()
-    nb_model_complement.fit(X_train, y2_train)
-
-    nb_model = GaussianNB()
-    nb_model.fit(X_train, y2_train)
-    y2_pred = nb_model.predict(X_test)
-    acc_nb = accuracy_score(y2_test, y2_pred)
-
-    cv_nb_5 = cross_val_score(GaussianNB(), X, y2, cv=5)
-    cv_nb_10 = cross_val_score(GaussianNB(), X, y2, cv=10)
 
 
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
@@ -293,6 +243,57 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         """,
         unsafe_allow_html=True
     )
+
+        # ======= 1. Load Data dari Excel =======
+        df = pd.read_excel("Data.xlsx", engine="openpyxl")
+
+        # Pastikan semua kolom yang dibutuhkan ada
+        required_columns = {'Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)', 'Decision  Tree', 'Naïve Bayes'}
+
+        # Pastikan data memiliki kolom yang sesuai
+        if required_columns.issubset(df.columns):
+            le = LabelEncoder()
+            df[['Decision  Tree', 'Naïve Bayes']] = df[['Decision  Tree', 'Naïve Bayes']].apply(le.fit_transform)
+
+            # Pisahkan fitur dan target
+            X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
+            y1 = df['Decision  Tree']
+            y2 = df['Naïve Bayes']
+
+            X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
+
+            # Buat model Decision Tree & Naive Bayes
+            dt_model = DecisionTreeClassifier()
+            dt_model.fit(X_train, y1_train)
+        
+            nb_model = GaussianNB()
+            nb_model.fit(X_train, y2_train)
+
+            #Variasi model Decision Tree
+            dt_gini = DecisionTreeClassifier(criterion='gini', random_state=42)
+            dt_entropy = DecisionTreeClassifier(criterion='entropy', random_state=42)
+
+            dt_gini.fit(X_train, y1_train)
+            dt_entropy.fit(X_train, y1_train)
+        
+            # Evaluasi
+            y_pred_gini = dt_gini.predict(X_test)
+            y_pred_entropy = dt_entropy.predict(X_test)
+
+            acc_gini = accuracy_score(y1_test, y_pred_gini)
+            acc_entropy = accuracy_score(y1_test, y_pred_entropy)
+    
+            # Variasi model Naive Bayes 
+            nb_model_complement = GaussianNB()
+            nb_model_complement.fit(X_train, y2_train)
+
+            nb_model = GaussianNB()
+            nb_model.fit(X_train, y2_train)
+            y2_pred = nb_model.predict(X_test)
+            acc_nb = accuracy_score(y2_test, y2_pred)
+
+            cv_nb_5 = cross_val_score(GaussianNB(), X, y2, cv=5)
+            cv_nb_10 = cross_val_score(GaussianNB(), X, y2, cv=10)
     
         y1_pred = dt_model.predict(X_test)  # Decision Tree
         y2_pred = nb_model.predict(X_test)  # Naïve Bayes
