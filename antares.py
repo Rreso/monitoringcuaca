@@ -15,6 +15,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, mean_squared_error
 from sklearn.model_selection import cross_val_score
+from sklearn.naive_bayes import ComplementNB
 
 # ======= 1. Load Data dari Excel =======
 df = pd.read_excel("Data.xlsx", engine="openpyxl")
@@ -43,6 +44,32 @@ if required_columns.issubset(df.columns):
 
     nb_model = GaussianNB()
     nb_model.fit(X_train, y2_train)
+
+    # Variasi model Decision Tree
+    dt_model_entropy = DecisionTreeClassifier(criterion='entropy', max_depth=4, min_samples_split=3)
+    dt_model_entropy.fit(X_train, y1_train)
+
+    # Variasi model Naive Bayes (opsional)
+    nb_model_complement = GaussianNB()
+    nb_model_complement.fit(X_train, y2_train)
+
+    y1_pred_entropy = dt_model_entropy.predict(X_test)
+    accuracy_dt_entropy = accuracy_score(y1_test, y1_pred_entropy)
+    mse_dt_entropy = mean_squared_error(y1_test, y1_pred_entropy)
+    rmse_dt_entropy = np.sqrt(mse_dt_entropy)
+    cv_scores_dt_entropy = cross_val_score(dt_model_entropy, X, y1, cv=5)
+    mean_cv_dt_entropy = np.mean(cv_scores_dt_entropy)
+
+
+
+    # Buat model tambahan
+    nb_model_complement = ComplementNB()
+    # Untuk model ini, X perlu dalam bentuk count (bukan numerik biasa)
+    # Jadi bisa dilewati jika datamu semua numerik
+
+    # Evaluasi ulang GaussianNB dengan cross-validation tambahan
+    cv_scores_nb_alt = cross_val_score(GaussianNB(), X, y2, cv=10)  # Ganti ke 10-fold
+    mean_cv_nb_alt = np.mean(cv_scores_nb_alt)
 
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
@@ -327,5 +354,16 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
 
         st.write("🎲 **Naïve Bayes** - Akurasi per fold:", cv_scores_nb)
         st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV: {mean_cv_nb:.3f}")
+
+        st.subheader("🌳 Evaluasi Tambahan Metode Decision Tree (Entropy)")
+        st.write(f"🎯 **Akurasi Decision Tree (Entropy)**: {accuracy_dt_entropy:.2f}")
+        st.write(f"📉 **MSE Decision Tree (Entropy)**: {mse_dt_entropy:.4f}")
+        st.write(f"📉 **RMSE Decision Tree (Entropy)**: {rmse_dt_entropy:.4f}")
+        st.write("🌳 **Decision Tree (Entropy)** - Akurasi per fold:", cv_scores_dt_entropy)
+        st.write(f"🌳 **Decision Tree (Entropy)** - Rata-rata Akurasi CV: {mean_cv_dt_entropy:.3f}"
+         
+         st.subheader("🎲 Evaluasi Tambahan Naive Bayes")
+        st.write("🎲 **Naïve Bayes** - Akurasi per fold (10-fold CV):", cv_scores_nb_alt)
+        st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV (10-fold): {mean_cv_nb_alt:.3f}")
 
 
