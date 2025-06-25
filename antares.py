@@ -36,9 +36,6 @@ if required_columns.issubset(df.columns):
     y2 = df['Naïve Bayes']
     
 
-
-    X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
-
     # Buat model Decision Tree & Naive Bayes
     dt_model = DecisionTreeClassifier()
     dt_model.fit(X_train, y1_train)
@@ -365,6 +362,8 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
          
         st.subheader("🎲 Naive Bayes berdasarkan rasio data")
         st.write(f"Akurasi Naive Bayes (rasio uji {int(split_ratio*100)}%): {acc_nb:.2f}")
+    
+        X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
 
         st.write("🎲 Naive Bayes - Akurasi CV 5-fold:", cv_nb_5)
         st.write("🎲 Naive Bayes - Akurasi CV 10-fold:", cv_nb_10)
