@@ -341,8 +341,9 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write(f"📉 **MSE Decision Tree**: {mse_dt:.4f}")
         st.write(f"📉 **RMSE Decision Tree**: {rmse_dt:.4f}")
 
-        st.write("🌳 **Decision Tree** - Akurasi per fold:", cv_scores_dt)
-        st.write(f"🌳 **Decision Tree** - Rata-rata Akurasi CV: {mean_cv_dt:.3f}")
+        st.subheader("🌳 Perbandingan Fungsi Split Decision Tree")
+        st.write(f"Akurasi Gini: {acc_gini:.2f}")
+        st.write(f"Akurasi Entropy: {acc_entropy:.2f}")
 
         st.subheader("🎲 Metode Naive Bayes")
         st.write(f"🎯 **Akurasi Naive Bayes**: {accuracy_nb:.2f}")
@@ -358,22 +359,10 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
 
         st.write(f"📉 **MSE Naïve Bayes**: {mse_nb:.4f}")
         st.write(f"📉 **RMSE Naïve Bayes**: {rmse_nb:.4f}")
-
-        st.write("🎲 **Naïve Bayes** - Akurasi per fold:", cv_scores_nb)
-        st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV: {mean_cv_nb:.3f}")
-
-        st.subheader("🌳 Perbandingan Fungsi Split Decision Tree")
-        # Split data training dan testing
-        
-
-        st.write(f"Akurasi Gini: {acc_gini:.2f}")
-        st.write(f"Akurasi Entropy: {acc_entropy:.2f}")
+ 
          
         st.subheader("🎲 Naive Bayes berdasarkan rasio data")
         st.write(f"Akurasi Naive Bayes (rasio uji {int(split_ratio*100)}%): {acc_nb:.2f}")
-    
-       
-
         st.write("🎲 Naive Bayes - Akurasi CV 5-fold:", cv_nb_5)
         st.write("🎲 Naive Bayes - Akurasi CV 10-fold:", cv_nb_10)
         st.write(f"Rata-rata CV 5-fold: {cv_nb_5.mean():.3f}")
