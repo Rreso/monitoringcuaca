@@ -362,7 +362,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.write("🌳 **Decision Tree (Entropy)** - Akurasi per fold:", cv_scores_dt_entropy)
         st.write(f"🌳 **Decision Tree (Entropy)** - Rata-rata Akurasi CV: {mean_cv_dt_entropy:.3f}")
          
-         st.subheader("🎲 Evaluasi Tambahan Naive Bayes")
+        st.subheader("🎲 Evaluasi Tambahan Naive Bayes")
         st.write("🎲 **Naïve Bayes** - Akurasi per fold (10-fold CV):", cv_scores_nb_alt)
         st.write(f"🎲 **Naïve Bayes** - Rata-rata Akurasi CV (10-fold): {mean_cv_nb_alt:.3f}")
 
