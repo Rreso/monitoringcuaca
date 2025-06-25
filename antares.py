@@ -35,7 +35,7 @@ if required_columns.issubset(df.columns):
     y1 = df['Decision  Tree']
     y2 = df['Naïve Bayes']
 
-    split_ratio =[0.2, 0.3, 0.4], format_func=lambda x: f"{int(x*100)}%")
+    split_ratio =[0.2, 0.3, 0.4], format_func=lambda x: f"{int(x*100)}%"
     X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
 
     # Buat model Decision Tree & Naive Bayes
