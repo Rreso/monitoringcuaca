@@ -387,6 +387,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
  
          
         st.subheader("🎲 Naive Bayes Cross Validation")
+        st.write(f"Akurasi Naive Bayes (rasio uji {int(split_ratio*100)}%): {acc_nb:.2f}")
 
         st.write("🎲 Naive Bayes - Akurasi CV 5-fold:", cv_nb_5)
         st.write("🎲 Naive Bayes - Akurasi CV 10-fold:", cv_nb_10)
