@@ -174,7 +174,13 @@ if st.session_state.selected_menu == "Dashboard 🏠":
         X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(
             X, y1, y2, test_size=0.2, shuffle=False
             )
+        # Buat model Decision Tree & Naive Bayes
+        dt_model = DecisionTreeClassifier()
+        dt_model.fit(X_train, y1_train)
         
+        nb_model = GaussianNB()
+        nb_model.fit(X_train, y2_train)
+
         # Gunakan model untuk prediksi cuaca berdasarkan data real-time
         input_data = [[suhu, kelembapan, angin]]
         dt_pred = dt_model.predict(input_data)
@@ -287,12 +293,6 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
             )
 
 
-            # Buat model Decision Tree & Naive Bayes
-            dt_model = DecisionTreeClassifier()
-            dt_model.fit(X_train, y1_train)
-        
-            nb_model = GaussianNB()
-            nb_model.fit(X_train, y2_train)
 
             #Variasi model Decision Tree
             dt_gini = DecisionTreeClassifier(criterion='gini', random_state=42)
