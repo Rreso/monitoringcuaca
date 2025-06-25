@@ -292,7 +292,12 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
             X, y1, y2, test_size=split_ratio, random_state=42
             )
 
-
+            # Buat model Decision Tree & Naive Bayes
+            dt_model = DecisionTreeClassifier()
+            dt_model.fit(X_train, y1_train)
+        
+            nb_model = GaussianNB()
+            nb_model.fit(X_train, y2_train)
 
             #Variasi model Decision Tree
             dt_gini = DecisionTreeClassifier(criterion='gini', random_state=42)
