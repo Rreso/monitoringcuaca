@@ -34,7 +34,9 @@ if required_columns.issubset(df.columns):
     X = df[['Suhu (°C)', 'Kelembapan (%)', 'Kecepatan Angin (Km/h)']]
     y1 = df['Decision  Tree']
     y2 = df['Naïve Bayes']
-    
+
+    split_ratio =[0.2, 0.3, 0.4], format_func=lambda x: f"{int(x*100)}%")
+    X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
 
     # Buat model Decision Tree & Naive Bayes
     dt_model = DecisionTreeClassifier()
@@ -356,6 +358,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
 
         st.subheader("🌳 Perbandingan Fungsi Split Decision Tree")
         # Split data training dan testing
+        
         split_ratio = st.selectbox("Pilih rasio data uji (%)", [0.2, 0.3, 0.4], format_func=lambda x: f"{int(x*100)}%")
         st.write(f"Akurasi Gini: {acc_gini:.2f}")
         st.write(f"Akurasi Entropy: {acc_entropy:.2f}")
@@ -363,7 +366,7 @@ elif st.session_state.selected_menu == "Evaluasi Model 📋":
         st.subheader("🎲 Naive Bayes berdasarkan rasio data")
         st.write(f"Akurasi Naive Bayes (rasio uji {int(split_ratio*100)}%): {acc_nb:.2f}")
     
-        X_train, X_test, y1_train, y1_test, y2_train, y2_test = train_test_split(X, y1, y2, test_size=split_ratio, random_state=42)
+       
 
         st.write("🎲 Naive Bayes - Akurasi CV 5-fold:", cv_nb_5)
         st.write("🎲 Naive Bayes - Akurasi CV 10-fold:", cv_nb_10)
