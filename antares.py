@@ -19,9 +19,6 @@ from sklearn.naive_bayes import ComplementNB
 from sklearn.tree import DecisionTreeClassifier
 
 
-
-
-
 # Konfigurasi sesi HTTP dengan retry untuk koneksi yang lebih stabil
 session = requests.Session()
 retry = Retry(total=5, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
@@ -29,8 +26,8 @@ session.mount("https://", HTTPAdapter(max_retries=retry))
 
 # === Konfigurasi Antares HTTP ===
 ACCESSKEY = st.secrets["ACCESSKEY"]
-PROJECT_NAME = "SistemMonitoringCuaca"
-DEVICE_NAME = "ESP32"
+PROJECT_NAME = "Sistem-Pemantauan-Cuaca"
+DEVICE_NAME = "ESP32-dht22-anemometer"
 
 URL_LATEST = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}/la"
 URL_HISTORY = f"https://platform.antares.id:8443/~/antares-cse/antares-id/{PROJECT_NAME}/{DEVICE_NAME}?rcn=4&ty=4&fu=1&lim=10"
